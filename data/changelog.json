@@ -1,0 +1,158 @@
+[
+ {
+  "data": "2026-10-18T09:01:26+0300",
+  "durata": 166,
+  "cereriAnaf": 27,
+  "total": 201,
+  "primaRulare": false,
+  "adaugate": 4,
+  "modificate": 5,
+  "eliminate": 1,
+  "schimbari": [
+   {
+    "tip": "adaugat",
+    "id": 513706,
+    "titlu": "Spatiu comercial - alte tipuri",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015484000000026916-spatiu-comercial-alte-tipuri"
+   },
+   {
+    "tip": "adaugat",
+    "id": 513705,
+    "titlu": "Teren construibil - INTRAVILAN in suprafata de 1977 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015483000000026915-teren-construibil-intravilan-in-suprafata-de-1977-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 513708,
+    "titlu": "Teren agricol - in suprafata de 8441 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015799000000026918-teren-agricol-in-suprafata-de-8441-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 513707,
+    "titlu": "Teren agricol - EXTRAVILAN in suprafata de 20359 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015669000000026917-teren-agricol-extravilan-in-suprafata-de-20359-mp"
+   },
+   {
+    "tip": "modificat",
+    "id": 512157,
+    "titlu": "Teren agricol - in suprafata de 2518 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600016446000000025719-teren-agricol-in-suprafata-de-2518-mp",
+    "campuri": [
+     {
+      "camp": "nrOferte",
+      "vechi": 3,
+      "nou": 5
+     }
+    ]
+   },
+   {
+    "tip": "modificat",
+    "id": 511761,
+    "titlu": "Ansamblu bunuri imobile format din Spatiu industrial - alte tipuri",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020422000000025332-ansamblu-bunuri-imobile-format-din-spatiu-industrial-alte-tipuri",
+    "campuri": [
+     {
+      "camp": "nrOferte",
+      "vechi": 0,
+      "nou": 1
+     }
+    ]
+   },
+   {
+    "tip": "modificat",
+    "id": 509368,
+    "titlu": "Apartament",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600019696000000022940-apartament",
+    "campuri": [
+     {
+      "camp": "nrOferte",
+      "vechi": 12,
+      "nou": 13
+     }
+    ]
+   },
+   {
+    "tip": "modificat",
+    "id": 509364,
+    "titlu": "Casa/Vila - casa de locuit",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015078000000022936-casa-vila-casa-de-locuit",
+    "campuri": [
+     {
+      "camp": "dataOraFinal",
+      "vechi": "2026-10-18T09:00:00+03:00",
+      "nou": "2026-10-18T10:00:00+03:00"
+     },
+     {
+      "camp": "nrOferte",
+      "vechi": 2,
+      "nou": 8
+     }
+    ]
+   },
+   {
+    "tip": "modificat",
+    "id": 509363,
+    "titlu": "Teren neîmprejmuit",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600019412000000022935-teren-neimprejmuit",
+    "campuri": [
+     {
+      "camp": "nrOferte",
+      "vechi": 1,
+      "nou": 2
+     }
+    ]
+   },
+   {
+    "tip": "eliminat",
+    "id": 509357,
+    "titlu": "Apartament  1 camera situat in Lupeni jud HD",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600024067000000022929-apartament-1-camera-situat-in-lupeni-jud-hd"
+   }
+  ]
+ },
+ {
+  "data": "2026-10-17T19:06:38+0300",
+  "durata": 522,
+  "cereriAnaf": 88,
+  "total": 198,
+  "primaRulare": false,
+  "adaugate": 0,
+  "modificate": 0,
+  "eliminate": 0,
+  "schimbari": []
+ },
+ {
+  "data": "2026-10-17T18:35:22+0300",
+  "durata": 1559,
+  "cereriAnaf": 200,
+  "total": 198,
+  "primaRulare": false,
+  "adaugate": 0,
+  "modificate": 0,
+  "eliminate": 0,
+  "schimbari": []
+ },
+ {
+  "data": "2026-10-17T17:51:46+0300",
+  "durata": 7,
+  "cereriAnaf": 2,
+  "total": 198,
+  "primaRulare": false,
+  "adaugate": 0,
+  "modificate": 0,
+  "eliminate": 0,
+  "schimbari": []
+ },
+ {
+  "data": "2026-10-17T17:38:28+0300",
+  "durata": 84,
+  "cereriAnaf": 2,
+  "total": 198,
+  "primaRulare": true,
+  "adaugate": 0,
+  "modificate": 0,
+  "eliminate": 0,
+  "schimbari": []
+ }
+]

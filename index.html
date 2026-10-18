@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ANAF Property Auctions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
+<style>
+/* Layout: app shell. Header · [filter sidebar | toolbar + active chips + view]. Map view = map + synced result list. Sidebar becomes a drawer under 960px. */
+:root {
+  --bg: #f2f4f3; --surface: #ffffff; --surface-2: #e8edeb; --line: #d6dedb; --line-2: #c3cdc9;
+  --ink: #14201d; --muted: #5b6965; --faint: #8a9793;
+  --accent: #0f6e66; --accent-ink: #ffffff; --accent-soft: #dbeeea; --accent-line: #9fd0c8;
+  --cut: #b4361f; --cut-soft: #f9e4de;
+  --warn: #a2650a; --warn-soft: #f8ecd6;
+  --ok: #1d7a3e; --ok-soft: #def2e4; --del: #9b2c2c; --del-soft: #f6e0e0;
+  --star: #d69e00;
+  --below: #6d28d9; --below-soft: #ede5fd;
+  --shadow: 0 1px 2px rgba(20,32,29,.06), 0 4px 16px rgba(20,32,29,.06);
+  --c1: #0f6e66; --c2: #c2410c; --c3: #4f46e5; --c4: #a16207; --c5: #be185d; --c6: #0369a1; --c7: #4d7c0f; --c8: #6b7280;
+  --tile-filter: none;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --r: 12px; --r-sm: 8px;
+  --side: 300px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1412; --surface: #151f1c; --surface-2: #1c2925; --line: #263631; --line-2: #34463f;
+  --ink: #e3ebe8; --muted: #94a49f; --faint: #6c7d78;
+  --accent: #4cc1b1; --accent-ink: #052421; --accent-soft: #15362f; --accent-line: #2b6b62;
+  --cut: #ff8a70; --cut-soft: #3b1d16;
+  --warn: #f0b452; --warn-soft: #382a10;
+  --ok: #6ad48f; --ok-soft: #133222; --del: #f08a8a; --del-soft: #3a1818;
+  --star: #f5c542;
+  --below: #c4b5fd; --below-soft: #2b2145;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  --c1: #4cc1b1; --c2: #fb923c; --c3: #a5b4fc; --c4: #facc15; --c5: #f472b6; --c6: #38bdf8; --c7: #a3e635; --c8: #9ca3af;
+  --tile-filter: invert(1) hue-rotate(180deg) brightness(.9) contrast(.9) saturate(.6);
+  color-scheme: dark;
+}}
+:root[data-theme="dark"] {
+  --bg: #0d1412; --surface: #151f1c; --surface-2: #1c2925; --line: #263631; --line-2: #34463f;
+  --ink: #e3ebe8; --muted: #94a49f; --faint: #6c7d78;
+  --accent: #4cc1b1; --accent-ink: #052421; --accent-soft: #15362f; --accent-line: #2b6b62;
+  --cut: #ff8a70; --cut-soft: #3b1d16;
+  --warn: #f0b452; --warn-soft: #382a10;
+  --ok: #6ad48f; --ok-soft: #133222; --del: #f08a8a; --del-soft: #3a1818;
+  --star: #f5c542;
+  --below: #c4b5fd; --below-soft: #2b2145;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+  --c1: #4cc1b1; --c2: #fb923c; --c3: #a5b4fc; --c4: #facc15; --c5: #f472b6; --c6: #38bdf8; --c7: #a3e635; --c8: #9ca3af;
+  --tile-filter: invert(1) hue-rotate(180deg) brightness(.9) contrast(.9) saturate(.6);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14.5px/1.5 var(--body); display: flex; flex-direction: column; overflow: hidden; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---------- header */
+.top {
+  display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  padding-block: 12px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+.logo { width: 34px; height: 34px; border-radius: 9px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; flex: none; }
+.logo svg { width: 20px; height: 20px; }
+h1 { margin: 0; font: 800 1.15rem/1.15 var(--display); letter-spacing: -.01em; }
+.meta { color: var(--muted); font-size: .8rem; }
+.refresh { display: flex; align-items: center; gap: 10px; }
+.status { font-size: .8rem; color: var(--muted); max-width: 320px; text-align: right; }
+.status.err { color: var(--cut); }
+.btn {
+  display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line-2); background: var(--surface);
+  padding: 7px 12px; border-radius: var(--r-sm); font-weight: 600; font-size: .85rem; white-space: nowrap;
+}
+.btn:hover { border-color: var(--accent-line); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn:disabled { opacity: .55; cursor: progress; }
+.btn svg { width: 15px; height: 15px; flex: none; }
+.btn.busy svg { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- shell */
+.shell { flex: 1; min-height: 0; display: grid; grid-template-columns: var(--side) minmax(0, 1fr); }
+aside.side {
+  background: var(--surface); border-right: 1px solid var(--line); overflow-y: auto; min-height: 0;
+  display: flex; flex-direction: column;
+}
+.side-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 6px; position: sticky; top: 0; background: var(--surface); z-index: 2; }
+.side-head h2 { margin: 0; font: 700 .95rem var(--display); }
+.linkbtn { border: 0; background: none; color: var(--accent); font-weight: 600; font-size: .82rem; padding: 4px; }
+.linkbtn:disabled { color: var(--faint); cursor: default; }
+.closebtn { display: none; }
+.fsec { padding: 12px 16px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.fsec:last-child { border-bottom: 0; }
+.fsec > label, .fsec > .lab { font: 600 .7rem var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: baseline; }
+.fsec .hint { font: 400 .75rem var(--body); letter-spacing: 0; text-transform: none; color: var(--faint); }
+.inp { width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 7px 10px; min-width: 0; }
+.inp:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+.search { padding-left: 32px; background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238a9793' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='M11 11l3.5 3.5'/%3E%3C/svg%3E") 10px center no-repeat; }
+.range { display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px; align-items: center; color: var(--faint); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 10px; font-size: .8rem;
+  display: inline-flex; align-items: center; gap: 6px; line-height: 1.3;
+}
+.chip:hover { border-color: var(--accent-line); }
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--ink); font-weight: 600; }
+.chip .n { font: 500 .72rem var(--mono); color: var(--faint); }
+.chip[aria-pressed="true"] .n { color: var(--accent); }
+.chip .sw { width: 8px; height: 8px; border-radius: 50%; }
+.chip:disabled { opacity: .4; cursor: default; }
+.fsec > label.toggle, .toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 500 .88rem/1.35 var(--body); letter-spacing: 0; text-transform: none; color: var(--ink); cursor: pointer; }
+.toggle small { display: block; color: var(--faint); font-size: .75rem; }
+.toggle input { appearance: none; width: 34px; height: 20px; border-radius: 999px; background: var(--line-2); position: relative; flex: none; cursor: pointer; transition: background .15s; }
+.toggle input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--surface); transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.toggle input:checked { background: var(--accent); }
+.toggle input:checked::after { transform: translateX(14px); }
+.clist { max-height: 210px; overflow-y: auto; display: grid; gap: 1px; margin-top: 2px; }
+.citem { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 6px; font-size: .86rem; cursor: pointer; }
+.citem:hover { background: var(--bg); }
+.citem input { accent-color: var(--accent); margin: 0; }
+.citem .n { margin-left: auto; font: 500 .72rem var(--mono); color: var(--faint); }
+.citem.zero { opacity: .45; }
+
+/* ---------- content */
+.content { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.bar {
+  display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--bg);
+}
+.tabs { display: inline-flex; background: var(--surface-2); padding: 3px; border-radius: 10px; gap: 2px; }
+.tab { border: 0; background: none; padding: 6px 12px; border-radius: 8px; font-weight: 600; font-size: .85rem; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; }
+.tab svg { width: 15px; height: 15px; }
+.tab[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+.badge { font: 600 .68rem var(--mono); background: var(--line); color: var(--muted); border-radius: 999px; padding: 0 6px; }
+.badge.hot { background: var(--warn); color: var(--surface); }
+.result { font-size: .85rem; color: var(--muted); }
+.result b { color: var(--ink); font-family: var(--mono); }
+.grow { flex: 1; }
+.sortsel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 6px 8px; font-size: .85rem; }
+.filterbtn { display: none; }
+.active { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 16px 0; }
+.active:empty { display: none; }
+.achip { display: inline-flex; align-items: center; gap: 4px; background: var(--accent-soft); color: var(--ink); border: 1px solid var(--accent-line); border-radius: 999px; padding: 2px 4px 2px 10px; font-size: .78rem; }
+.achip button { border: 0; background: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); padding: 0; }
+.achip button:hover { background: var(--surface); color: var(--ink); }
+.views { flex: 1; min-height: 0; position: relative; }
+.view { position: absolute; inset: 0; }
+
+/* map view */
+#mapView { display: grid; grid-template-columns: minmax(0, 1fr) 380px; }
+.mapwrap { position: relative; min-width: 0; }
+#map { position: absolute; inset: 0; background: var(--surface-2); }
+#map .leaflet-tile-pane { filter: var(--tile-filter); }
+.mapctl { position: absolute; z-index: 500; top: 12px; right: 12px; display: flex; gap: 6px; }
+.mapctl .btn { box-shadow: var(--shadow); }
+.legend {
+  position: absolute; z-index: 500; left: 12px; bottom: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+  padding: 8px 12px; font-size: .76rem; display: grid; gap: 3px; box-shadow: var(--shadow);
+}
+.legend span { display: flex; gap: 7px; align-items: center; }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.legend .approx { color: var(--muted); border-top: 1px solid var(--line); padding-top: 5px; margin-top: 2px; }
+.ring { width: 9px; height: 9px; border-radius: 50%; border: 1.5px dashed var(--muted); flex: none; }
+.maplist { border-left: 1px solid var(--line); overflow-y: auto; background: var(--bg); padding: 10px; display: grid; gap: 8px; align-content: start; }
+.mini { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 8px; cursor: pointer; text-align: left; }
+.mini:hover, .mini.hl { border-color: var(--accent); }
+.mini img, .mini .noimg { width: 84px; height: 68px; object-fit: cover; border-radius: 8px; background: var(--surface-2); display: block; }
+.mini .tt { font-weight: 600; font-size: .84rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.mini .ln { font-size: .76rem; color: var(--muted); }
+.mini .pr { font: 500 .9rem var(--mono); }
+.pin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,.35); transition: transform .15s; }
+.pin.approx { border: 2px dashed var(--surface); opacity: .85; }
+.pin.hl { transform: scale(1.6); }
+.marker-cluster { border-radius: 50%; background: color-mix(in srgb, var(--accent) 28%, transparent); background-clip: padding-box; }
+.marker-cluster div { width: 30px; height: 30px; margin: 5px 0 0 5px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); font: 600 12px var(--mono); }
+.marker-cluster span { line-height: 1; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); }
+.leaflet-popup-content-wrapper { padding: 0; overflow: hidden; border-radius: var(--r); }
+.leaflet-popup-content { margin: 0; width: 290px !important; }
+.leaflet-container a.leaflet-popup-close-button { color: var(--accent-ink); background: rgba(0,0,0,.35); border-radius: 50%; top: 6px; right: 6px; width: 22px; height: 22px; line-height: 20px; }
+
+/* shared card bits */
+.pill { display: inline-flex; align-items: center; gap: 4px; font-size: .7rem; font-weight: 600; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+.pill.cut { background: var(--cut-soft); color: var(--cut); }
+.pill.new { background: var(--ok-soft); color: var(--ok); }
+.pill.chg { background: var(--warn-soft); color: var(--warn); }
+.pill.below { background: var(--below-soft); color: var(--below); }
+.card .tl .pill.below { background: var(--below); color: var(--surface); }
+.muted { color: var(--muted); }
+.pill.bids { background: var(--ok-soft); color: var(--ok); }
+.card .tl .pill.bids { background: var(--ok); color: var(--surface); }
+.pill.share { background: var(--surface-2); color: var(--muted); }
+.pill.soon { background: var(--cut); color: var(--surface); }
+.pill.time { background: var(--surface-2); color: var(--muted); }
+.old { text-decoration: line-through; color: var(--faint); font-size: .8em; margin-left: 6px; }
+.star { border: 0; background: none; padding: 4px; color: var(--faint); line-height: 0; }
+.star svg { width: 18px; height: 18px; }
+.star[aria-pressed="true"] { color: var(--star); }
+.star[aria-pressed="true"] svg { fill: currentColor; }
+
+/* popup */
+.pop .img { position: relative; }
+.pop img { width: 100%; height: 150px; object-fit: cover; display: block; background: var(--surface-2); }
+.pop .in { padding: 10px 14px 12px; display: grid; gap: 6px; }
+.pop h3 { margin: 0; font: 700 .95rem/1.3 var(--display); }
+.pop .price { font: 500 1.1rem var(--mono); }
+.pop .sub { color: var(--muted); font-size: .78rem; }
+.pop .row { display: flex; flex-wrap: wrap; gap: 4px; }
+.pop .acts { display: flex; justify-content: space-between; align-items: center; }
+.kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; margin: 2px 0; font-size: .78rem; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; overflow-wrap: anywhere; }
+.pop .sub svg { vertical-align: -1px; }
+.pop a.go { color: var(--accent); font-weight: 600; text-decoration: none; }
+
+/* cards view */
+#cardsView { overflow-y: auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; padding: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .15s, transform .15s; }
+.card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.card .img { position: relative; aspect-ratio: 16 / 10; background: var(--surface-2); max-width: 100%; }
+.card .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .tl { position: absolute; top: 8px; left: 8px; display: flex; gap: 4px; flex-wrap: wrap; }
+.card .tl .pill { box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+.card .tl .pill.cut { background: var(--cut); color: var(--surface); }
+.card .tl .pill.new { background: var(--ok); color: var(--surface); }
+.card .img .star { position: absolute; top: 6px; right: 6px; background: var(--surface); border-radius: 50%; box-shadow: var(--shadow); padding: 6px; }
+.card .body { padding: 12px 14px 14px; display: grid; gap: 6px; flex: 1; align-content: start; }
+.card .type { font: 600 .68rem var(--body); letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.card h3 { margin: 0; font: 600 .95rem/1.3 var(--display); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card h3 a { color: inherit; text-decoration: none; }
+.card h3 a:hover { color: var(--accent); }
+.card .loc { color: var(--muted); font-size: .8rem; display: flex; align-items: center; gap: 4px; }
+.card .facts { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: .78rem; color: var(--muted); }
+.card .facts b { color: var(--ink); font-weight: 500; font-family: var(--mono); }
+.card .foot { display: flex; align-items: end; justify-content: space-between; gap: 8px; margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--line); }
+.card .price { font: 600 1.15rem/1.1 var(--mono); }
+.card .ppm { font: .72rem var(--mono); color: var(--faint); }
+.card .actions { display: flex; gap: 6px; }
+.iconbtn { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r-sm); width: 32px; height: 32px; display: grid; place-items: center; color: var(--muted); padding: 0; }
+.iconbtn:hover { color: var(--accent); border-color: var(--accent-line); }
+.iconbtn svg { width: 16px; height: 16px; }
+
+/* table */
+#tableView { overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+thead th { position: sticky; top: 0; background: var(--surface); z-index: 1; text-align: left; font: 600 .68rem var(--body); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+thead th[data-k] { cursor: pointer; user-select: none; }
+thead th[data-k]:hover { color: var(--ink); }
+thead th[data-dir="asc"]::after { content: " ↑"; color: var(--accent); }
+thead th[data-dir="desc"]::after { content: " ↓"; color: var(--accent); }
+tbody td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+tbody tr:hover { background: var(--surface); }
+td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.nowrap { white-space: nowrap; }
+td .t { font-weight: 600; color: var(--ink); text-decoration: none; display: block; max-width: 380px; }
+td .t:hover { color: var(--accent); text-decoration: underline; }
+td .d { color: var(--muted); font-size: .76rem; max-width: 380px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+td.thumb img { width: 56px; height: 40px; object-fit: cover; border-radius: 6px; background: var(--surface-2); display: block; }
+
+/* log */
+#logView { overflow: auto; }
+.log { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; display: grid; gap: 10px; }
+.log h2 { margin: 0 0 4px; font: 700 1.1rem var(--display); }
+.log p.lead { margin: 0 0 8px; color: var(--muted); font-size: .9rem; max-width: 65ch; }
+.run { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
+.run summary { list-style: none; cursor: pointer; padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.run summary::-webkit-details-marker { display: none; }
+.run summary::before { content: "▸"; color: var(--muted); transition: transform .15s; }
+.run[open] summary::before { transform: rotate(90deg); }
+.run .when { font: 500 .88rem var(--mono); }
+.run .facts { color: var(--muted); font-size: .8rem; margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+.chg { border-top: 1px solid var(--line); padding: 10px 16px; display: grid; gap: 4px; font-size: .86rem; }
+.chg a { color: var(--ink); font-weight: 600; text-decoration: none; }
+.chg a:hover { color: var(--accent); }
+.chg .f { font-size: .8rem; color: var(--muted); display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 2px 10px; }
+.chg .f del { color: var(--del); } .chg .f ins { color: var(--ok); text-decoration: none; }
+.kind { font-size: .66rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 4px; padding: 1px 6px; margin-right: 8px; }
+.kind.adaugat { background: var(--ok-soft); color: var(--ok); }
+.kind.modificat { background: var(--warn-soft); color: var(--warn); }
+.kind.eliminat { background: var(--del-soft); color: var(--del); }
+.livelog { font: .76rem/1.5 var(--mono); color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 14px; white-space: pre-wrap; max-height: 180px; overflow: auto; }
+
+#empty { position: absolute; inset: 0; z-index: 600; background: var(--bg); align-content: center; }
+.empty { padding: 56px 16px; text-align: center; color: var(--muted); display: grid; gap: 10px; justify-items: center; }
+.empty b { color: var(--ink); font: 600 1rem var(--display); }
+.scrim { display: none; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 999px; font-size: .85rem; z-index: 2000; box-shadow: var(--shadow); }
+
+@media (max-width: 1280px) { #mapView { grid-template-columns: minmax(0, 1fr) 320px; } }
+@media (max-width: 1100px) { #mapView { grid-template-columns: minmax(0, 1fr); } .maplist { display: none; } }
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  aside.side { position: fixed; z-index: 1500; top: 0; bottom: 0; left: 0; width: min(340px, 88vw); transform: translateX(-102%); transition: transform .2s; box-shadow: var(--shadow); padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body.drawer aside.side { transform: none; }
+  body.drawer .scrim { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 1400; }
+  .closebtn { display: inline-flex; }
+  .filterbtn { display: inline-flex; }
+}
+@media (max-width: 640px) {
+  .status { display: none; }
+  .tab span.lbl { display: none; }
+  .legend { display: none; }
+  .grid { padding: 12px; gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 13l-7.5 7.5a2.12 2.12 0 0 1-3-3L11 10"/><path d="M16 16l6-6"/><path d="M8 8l6-6"/><path d="M9 7l8 8"/><path d="M21 11l-8-8"/></svg></div>
+    <div>
+      <h1>ANAF Property Auctions</h1>
+      <div class="meta" id="meta">Loading…</div>
+    </div>
+  </div>
+  <div class="refresh">
+    <span class="status" id="status" aria-live="polite"></span>
+    <button class="btn primary" id="refreshBtn" type="button" title="Download the latest list from eLicitații">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+      Refresh
+    </button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="side" id="side" aria-label="Filters">
+    <div class="side-head">
+      <h2>Filters</h2>
+      <div>
+        <button class="linkbtn" id="resetBtn" type="button">Reset all</button>
+        <button class="btn closebtn" id="closeSide" type="button" aria-label="Close filters">Done</button>
+      </div>
+    </div>
+
+    <div class="fsec">
+      <label for="q">Search</label>
+      <input class="inp search" type="search" id="q" placeholder="Title, description, locality…" autocomplete="off">
+    </div>
+    <div class="fsec">
+      <label class="toggle"><span>Favorites only <small id="favCount">No favorites yet</small></span><input type="checkbox" id="fFav"></label>
+      <label class="toggle"><span>New or price changed <small>Since the previous refresh</small></span><input type="checkbox" id="fFresh"></label>
+      <label class="toggle"><span>Bids below starting price <small>Only where the auction page says so</small></span><input type="checkbox" id="fBelow"></label>
+    </div>
+    <div class="fsec">
+      <div class="lab">Property type</div>
+      <div class="chips" id="fType"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Starting price <span class="hint">RON</span></div>
+      <div class="range"><input class="inp mono" id="pMin" inputmode="numeric" placeholder="Min"><span>–</span><input class="inp mono" id="pMax" inputmode="numeric" placeholder="Max"></div>
+      <div class="chips" id="pPresets"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Area <span class="hint">m² · from description</span></div>
+      <div class="range"><input class="inp mono" id="aMin" inputmode="numeric" placeholder="Min"><span>–</span><input class="inp mono" id="aMax" inputmode="numeric" placeholder="Max"></div>
+      <div class="chips" id="aPresets"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Rooms <span class="hint">homes only</span></div>
+      <div class="chips" id="fRooms"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Discount</div>
+      <div class="chips" id="fDisc"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Auction ends</div>
+      <div class="chips" id="fEnds"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Land zone</div>
+      <div class="chips" id="fZone"></div>
+    </div>
+    <div class="fsec">
+      <label class="toggle"><span>Full ownership only <small>Hide fractional shares (cotă-parte)</small></span><input type="checkbox" id="fFull"></label>
+      <label class="toggle"><span>No encumbrances listed <small>Hide mortgages, liens and other sarcini</small></span><input type="checkbox" id="fClean"></label>
+    </div>
+    <div class="fsec">
+      <div class="lab">Bids <span class="hint" id="bidsHint">from each auction page</span></div>
+      <div class="chips" id="fBids"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Auction round</div>
+      <div class="chips" id="fRound"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">Location accuracy <span class="hint">from Loc deținere</span></div>
+      <div class="chips" id="fPrec"></div>
+    </div>
+    <div class="fsec">
+      <div class="lab">County <span class="hint" id="countyHint"></span></div>
+      <input class="inp search" type="search" id="countyQ" placeholder="Find a county…" autocomplete="off">
+      <div class="clist" id="fCounty"></div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <section class="content">
+    <div class="bar">
+      <button class="btn filterbtn" id="openSide" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        Filters <span class="badge" id="fCountBadge" hidden>0</span>
+      </button>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-view="mapView" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg><span class="lbl">Map</span></button>
+        <button class="tab" role="tab" data-view="cardsView" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="lbl">Cards</span></button>
+        <button class="tab" role="tab" data-view="tableView" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h18M3 12h18M3 19h18"/></svg><span class="lbl">Table</span></button>
+        <button class="tab" role="tab" data-view="logView" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="lbl">Changes</span><span class="badge" id="logBadge">0</span></button>
+      </div>
+      <span class="result" id="result"></span>
+      <span class="grow"></span>
+      <label class="sr" for="sort">Sort by</label>
+      <select class="sortsel" id="sort">
+        <option value="ends">Ending soonest</option>
+        <option value="priceAsc">Price: low to high</option>
+        <option value="priceDesc">Price: high to low</option>
+        <option value="disc">Biggest discount</option>
+        <option value="minBid">Lowest possible bid</option>
+        <option value="ppm">Price per m²: lowest</option>
+        <option value="area">Area: largest</option>
+        <option value="bids">Most bids</option>
+        <option value="newest">Newest first</option>
+      </select>
+      <button class="btn" id="csvBtn" type="button" title="Download the filtered list as CSV">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>CSV
+      </button>
+    </div>
+    <div class="active" id="activeChips"></div>
+
+    <div class="views">
+      <section class="view" id="mapView" role="tabpanel">
+        <div class="mapwrap">
+          <div id="map"></div>
+          <div class="mapctl"><button class="btn" id="fitBtn" type="button">Zoom to results</button></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="maplist" id="mapList"></div>
+      </section>
+      <section class="view" id="cardsView" role="tabpanel" hidden><div class="grid" id="grid"></div></section>
+      <section class="view" id="tableView" role="tabpanel" hidden>
+        <table>
+          <thead><tr>
+            <th></th><th></th>
+            <th data-k="titlu">Property</th>
+            <th data-k="type">Type</th>
+            <th data-k="place">Location</th>
+            <th data-k="area" class="num">Area m²</th>
+            <th data-k="pret" class="num">Starting price</th>
+            <th data-k="minBid" class="num" title="Lowest bid accepted when 2+ bidders take part">Min. bid</th>
+            <th data-k="ppm" class="num">RON/m²</th>
+            <th data-k="reducere" class="num">Discount</th>
+            <th data-k="nrOferte" class="num">Bids</th>
+            <th data-k="endsTs">Ends</th>
+            <th></th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </section>
+      <section class="view" id="logView" role="tabpanel" hidden><div class="log" id="log"></div></section>
+      <div class="empty" id="empty" hidden><b>No auctions match these filters</b><span>Try widening the price or area range, or remove a filter.</span><button class="btn" type="button" id="emptyReset">Reset all filters</button></div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+<script>
+/* ================= helpers */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const nf0 = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
+const money = v => v == null ? "—" : nf0.format(v) + " RON";
+const short = v => v >= 1e6 ? (v / 1e6).toFixed(v >= 1e7 ? 0 : 1).replace(/\.0$/, "") + "M" : v >= 1e3 ? Math.round(v / 1e3) + "k" : String(Math.round(v));
+const dtLong = s => s ? new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }) : "—";
+const dtShort = s => s ? new Date(s).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "—";
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+function endsIn(ts) {
+  const h = (ts - Date.now()) / 36e5;
+  if (h <= 0) return { txt: "Ended", soon: false };
+  if (h < 24) return { txt: `Ends in ${Math.max(1, Math.round(h))}h`, soon: true };
+  const d = Math.floor(h / 24), r = Math.round(h % 24);
+  return { txt: `Ends in ${d}d${r ? " " + r + "h" : ""}`, soon: false };
+}
+const ICON = {
+  star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>',
+  pin: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/></svg>',
+  ext: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'
+};
+
+/* ================= vocab */
+const TYPE = { "terenuri": "Land", "apartamente": "Apartments", "case vile": "Houses & villas", "constructii speciale": "Special buildings",
+  "hale si depozite": "Halls & warehouses", "spatii comerciale": "Commercial spaces", "garsoniere": "Studios" };
+const typeLabel = s => s ? (TYPE[norm(s).replace(/[-\s]+/g, " ")] || s) : "Other";
+const FIELD = { titlu: "Title", pret: "Price", stare: "Status", dataOraStart: "Starts", dataOraFinal: "Ends", reducere: "Discount", descriere: "Description", subcategorie: "Type", nrOferte: "Bids" };
+const KIND = { adaugat: "New", modificat: "Changed", eliminat: "Removed" };
+const STATUS = { in_derulare: "In progress", in_publicitate: "Announced" };
+
+/* ================= enrichment: details parsed from the Romanian descriptions */
+function parseNum(s) {
+  s = s.replace(/\s/g, "");
+  if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)) s = s.replace(/\./g, "").replace(",", ".");
+  else if (/^\d{1,3}(,\d{3})+$/.test(s)) s = s.replace(/,/g, "");
+  else s = s.replace(",", ".");
+  return parseFloat(s);
+}
+function enrich(a) {
+  const text = (a.descriere || "") + " " + (a.titlu || "");
+  const m = text.match(/(\d[\d.,]*)\s*(mp\b|m2\b|m²|m\.p\.|metri\s*p|ha\b|hectar)/i);
+  let area = null;
+  if (m) { area = parseNum(m[1].replace(/[.,]$/, "")); if (/^h/i.test(m[2])) area *= 10000; if (!(area > 0 && area < 5e7)) area = null; }
+  let rooms = null;
+  const r = text.match(/(\d+)\s*camer/i);
+  if (r) rooms = +r[1]; else if (/\bo\s+camer/i.test(text) || /garsonier/i.test(a.subcategorie || "")) rooms = 1;
+  const zi = text.search(/intravilan/i), ze = text.search(/extravilan/i);
+  const zone = zi < 0 && ze < 0 ? null : (ze < 0 || (zi >= 0 && zi < ze)) ? "intra" : "extra";
+  const sh = text.match(/cot[aăe]\S*[^0-9]{0,30}?(\d+)\s*\/\s*(\d+)/i);
+  const share = sh && sh[1] !== sh[2] ? `${sh[1]}/${sh[2]}` : null;
+  const endsTs = a.dataOraFinal ? new Date(a.dataOraFinal).getTime() : Infinity;
+  return Object.assign(a, {
+    area, rooms, zone, share, endsTs,
+    type: typeLabel(a.subcategorie),
+    place: [a.localitate, a.judet].filter(Boolean).join(", "),
+    ppm: area && a.pret ? a.pret / area : null,
+    changed: a.pretAnterior != null && a.pretAnterior !== a.pret,
+    seenTs: a.vazutPrima ? new Date(a.vazutPrima).getTime() : 0,
+    belowVal: a.pretEvaluare && a.pret ? Math.round((1 - a.pret / a.pretEvaluare) * 100) : null,
+    // Only when the auction page itself says bids under the starting price are accepted (needs ≥ 2 bidders)
+    minBid: a.ofertaMinima ?? null,
+    encumbered: !!(a.sarcini && !/^\s*(nu|fara|fără|nu e cazul|nu este cazul|nu sunt|-)\b/i.test(a.sarcini)),
+    hay: norm([a.titlu, a.descriere, a.localitate, a.judet, a.adresa, a.unitateFiscala, a.subcategorie, typeLabel(a.subcategorie)].join(" "))
+  });
+}
+
+/* ================= state */
+let DATA = { items: [] }, LOG = [], ITEMS = [], filtered = [];
+const DEFAULT = () => ({ q: "", types: [], counties: [], pMin: "", pMax: "", aMin: "", aMax: "", rooms: "", disc: 0, ends: 0, zone: "", full: false, clean: false, below: false, bids: "", round: "", prec: "", fav: false, fresh: false });
+let F = DEFAULT();
+let sortKey = store.get("elic-sort", "ends"), tableSort = null;
+let favs = new Set(store.get("elic-favs", []));
+const catColor = {};
+
+const P_PRESETS = [["Under 25k", "", 25000], ["25k–100k", 25000, 100000], ["100k–500k", 100000, 500000], ["500k+", 500000, ""]];
+const A_PRESETS = [["Under 100 m²", "", 100], ["100–1,000", 100, 1000], ["1,000–10,000", 1000, 10000], ["1 ha+", 10000, ""]];
+const ROOMS = [["", "Any"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4+"]];
+const DISC = [[0, "Any"], [10, "10%+"], [25, "25%+"], [50, "50%"]];
+const ENDS = [[0, "Any time"], [24, "Within 24h"], [72, "3 days"], [168, "7 days"]];
+const ZONE = [["", "Any"], ["intra", "Intravilan · built-up"], ["extra", "Extravilan · outside"]];
+const BIDS = [["", "Any"], ["yes", "With bids"], ["no", "No bids yet"]];
+const ROUND = [["", "Any"], ["1", "First auction"], ["2", "Repeat (2nd+)"]];
+const PREC = [["", "Any"], ["adresa", "Street address"], ["loc", "Locality or better"]];
+const PREC_LABEL = { adresa: "Street address", localitate: "Locality", judet: "County only (approximate)" };
+const ordinal = n => n + ({ 1: "st", 2: "nd", 3: "rd" }[n % 100 > 10 && n % 100 < 14 ? 0 : n % 10] || "th");
+
+/* each filter: test(item) + whether it's active, so facet counts can skip their own filter */
+const num = v => v === "" || v == null ? null : +String(v).replace(/[^\d.]/g, "");
+const TESTS = {
+  q: a => !F.q || norm(F.q).split(/\s+/).every(w => a.hay.includes(w)),
+  types: a => !F.types.length || F.types.includes(a.subcategorie),
+  counties: a => !F.counties.length || F.counties.includes(a.judet),
+  price: a => (num(F.pMin) == null || (a.pret ?? 0) >= num(F.pMin)) && (num(F.pMax) == null || (a.pret ?? Infinity) <= num(F.pMax)),
+  area: a => (num(F.aMin) == null && num(F.aMax) == null) || (a.area != null && (num(F.aMin) == null || a.area >= num(F.aMin)) && (num(F.aMax) == null || a.area <= num(F.aMax))),
+  rooms: a => !F.rooms || (a.rooms != null && (F.rooms === "4" ? a.rooms >= 4 : a.rooms === +F.rooms)),
+  disc: a => !F.disc || (a.reducere || 0) >= F.disc,
+  ends: a => !F.ends || a.endsTs - Date.now() <= F.ends * 36e5,
+  zone: a => !F.zone || a.zone === F.zone,
+  full: a => !F.full || !a.share,
+  clean: a => !F.clean || !a.encumbered,
+  below: a => !F.below || a.minBid != null,
+  bids: a => !F.bids || (F.bids === "yes" ? a.nrOferte > 0 : !(a.nrOferte > 0)),
+  round: a => !F.round || (F.round === "1" ? a.nrLicitatie === 1 : (a.nrLicitatie || 0) >= 2),
+  prec: a => !F.prec || (F.prec === "adresa" ? a.precizie === "adresa" : a.precizie && a.precizie !== "judet"),
+  fav: a => !F.fav || favs.has(a.id),
+  fresh: a => !F.fresh || a.nou || a.changed
+};
+const passAll = (a, skip) => Object.entries(TESTS).every(([k, t]) => k === skip || t(a));
+
+/* ================= map */
+const map = L.map("map", { zoomControl: true }).setView([45.9, 24.9], 7);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+const cluster = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 45 });
+map.addLayer(cluster);
+const markers = new Map();
+
+function popupHtml(a) {
+  return `<div class="pop">
+    <div class="img">${a.imagine ? `<img src="${esc(a.imagine)}" alt="" loading="lazy">` : ""}</div>
+    <div class="in">
+      <div class="row">${badges(a)}</div>
+      <h3>${esc(a.titlu)}</h3>
+      <div class="price">${money(a.pret)}${a.changed ? `<span class="old">${money(a.pretAnterior)}</span>` : ""}</div>
+      <div class="sub">${esc(a.type)}${a.area ? ` · ${nf0.format(a.area)} m²` : ""}${a.ppm ? ` · ${nf0.format(a.ppm)} RON/m²` : ""}</div>
+      <div class="sub">${ICON.pin} ${esc(a.adresa || a.place || "Location unknown")}<br><i>Pin: ${PREC_LABEL[a.precizie] || "unknown"}</i></div>
+      ${detailRows(a)}
+      <div class="sub">Ends ${dtShort(a.dataOraFinal)}</div>
+      <div class="acts"><a class="go" href="${esc(a.url)}" target="_blank" rel="noopener">View on eLicitații →</a>${starBtn(a)}</div>
+    </div></div>`;
+}
+function renderMap() {
+  cluster.clearLayers(); markers.clear();
+  const list = [];
+  for (const a of filtered) {
+    if (a.lat == null) continue;
+    const icon = L.divIcon({ className: "", iconSize: [16, 16], html: `<div class="pin ${a.precizie === "judet" ? "approx" : ""}" data-pin="${a.id}" style="background:${css(catColor[a.subcategorie] || "--c8")}"></div>` });
+    const m = L.marker([a.lat, a.lon], { icon, title: a.titlu }).bindPopup(() => popupHtml(a), { maxWidth: 300, minWidth: 290 });
+    markers.set(a.id, m); list.push(m);
+  }
+  cluster.addLayers(list);
+  const cats = Object.keys(catColor);
+  $("legend").innerHTML = cats.map(c => `<span><i class="dot" style="background:var(${catColor[c]})"></i>${esc(typeLabel(c))}</span>`).join("") +
+    `<span class="approx"><i class="ring"></i>Dashed = county only (approximate)</span>`;
+  $("mapList").innerHTML = filtered.slice(0, 150).map(a => `<button class="mini" type="button" data-id="${a.id}">
+      ${a.imagine ? `<img src="${esc(a.imagine)}" alt="" loading="lazy">` : `<span class="noimg"></span>`}
+      <span style="display:grid;gap:3px;min-width:0">
+        <span class="tt">${esc(a.titlu)}</span>
+        <span class="ln">${esc(a.type)} · ${esc(a.place || "—")}</span>
+        <span class="pr">${money(a.pret)} ${a.reducere ? `<span class="pill cut">−${a.reducere}%</span>` : ""}</span>
+        ${a.minBid != null ? `<span class="ln"><span class="pill below">Bids from ${nf0.format(a.minBid)} RON</span></span>` : ""}
+      </span></button>`).join("") + (filtered.length > 150 ? `<div class="empty" style="padding:12px">Showing 150 of ${filtered.length}. Narrow the filters or zoom the map.</div>` : "");
+}
+function fitResults() {
+  const pts = filtered.filter(a => a.lat != null).map(a => [a.lat, a.lon]);
+  map.invalidateSize();
+  if (pts.length) map.fitBounds(pts, { padding: [40, 40], maxZoom: 12 });
+}
+function showOnMap(id) {
+  if ($("mapView").hidden) selectTab("mapView");
+  const m = markers.get(id); if (!m) return;
+  setTimeout(() => { map.invalidateSize(); cluster.zoomToShowLayer(m, () => m.openPopup()); }, 60);
+}
+function highlight(id, on) {
+  document.querySelectorAll(`[data-pin="${id}"]`).forEach(p => p.classList.toggle("hl", on));
+}
+$("mapList").addEventListener("click", e => { const b = e.target.closest(".mini"); if (b) showOnMap(+b.dataset.id); });
+$("mapList").addEventListener("mouseover", e => { const b = e.target.closest(".mini"); if (b) highlight(b.dataset.id, true); });
+$("mapList").addEventListener("mouseout", e => { const b = e.target.closest(".mini"); if (b) highlight(b.dataset.id, false); });
+$("fitBtn").addEventListener("click", fitResults);
+
+/* ================= cards */
+function badges(a) {
+  const e = endsIn(a.endsTs);
+  return [
+    a.reducere ? `<span class="pill cut">−${a.reducere}%</span>` : "",
+    a.minBid != null ? `<span class="pill below" title="${esc(BELOW_TIP(a))}">Bids from ${short(a.minBid)}</span>` : "",
+    a.nou ? `<span class="pill new">New</span>` : "",
+    a.nrOferte > 0 ? `<span class="pill bids">${bidsTxt(a)}</span>` : "",
+    a.changed ? `<span class="pill chg">Price ${a.pret < a.pretAnterior ? "↓" : "↑"}</span>` : "",
+    `<span class="pill ${e.soon ? "soon" : "time"}">${e.txt}</span>`,
+    a.share ? `<span class="pill share" title="Fractional ownership share">Share ${esc(a.share)}</span>` : ""
+  ].join("");
+}
+const bidsTxt = a => `${a.nrOferte} bid${a.nrOferte === 1 ? "" : "s"}`;
+function ago(s) {
+  const m = (Date.now() - new Date(s).getTime()) / 6e4;
+  return m < 60 ? `${Math.max(1, Math.round(m))} min ago` : m < 2880 ? `${Math.round(m / 60)} h ago` : `${Math.round(m / 1440)} days ago`;
+}
+const BELOW_TIP = a => `You can bid below the starting price, but not under ${money(a.minBid)} (as stated on the auction page). It is awarded to the highest bid only if at least two participants place valid offers; otherwise the bid must exceed the starting price.`;
+function detailRows(a) {
+  const r = [];
+  if (a.pretEvaluare) r.push(["Valuation", `${money(a.pretEvaluare)}${a.belowVal > 0 ? ` <span class="pill cut">${a.belowVal}% below</span>` : ""}`]);
+  if (a.minBid != null) r.push(["Lowest valid bid", `<b>${money(a.minBid)}</b> <span class="muted">· only if 2+ bidders; with one bidder the offer must beat the starting price</span>`]);
+  if (a.garantie) r.push(["Guarantee", money(a.garantie)]);
+  if (a.pasMinim) r.push(["Min. bid step", money(a.pasMinim)]);
+  if (a.nrLicitatie) r.push(["Round", `${ordinal(a.nrLicitatie)} auction`]);
+  r.push(["Bids", `${a.nrOferte > 0 ? bidsTxt(a) : "None yet"}${a.citit ? ` <span class="muted">· checked ${ago(a.citit)}</span>` : ""}`]);
+  if (a.sarcini) r.push(["Encumbrances", esc(a.sarcini)]);
+  if (a.telefon) r.push(["Phone", `<span class="mono" style="user-select:all">${esc(a.telefon)}</span>`]);
+  return r.length ? `<dl class="kv">${r.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>` : "";
+}
+const starBtn = a => `<button class="star" type="button" data-fav="${a.id}" aria-pressed="${favs.has(a.id)}" aria-label="Save to favorites">${ICON.star}</button>`;
+function renderCards() {
+  $("grid").innerHTML = filtered.map(a => `<article class="card">
+    <div class="img">
+      ${a.imagine ? `<img src="${esc(a.imagine)}" alt="" loading="lazy">` : ""}
+      <div class="tl">${a.reducere ? `<span class="pill cut">−${a.reducere}%</span>` : ""}${a.minBid != null ? `<span class="pill below" title="${esc(BELOW_TIP(a))}">Below-start bids</span>` : ""}${a.nou ? `<span class="pill new">New</span>` : ""}${a.nrOferte > 0 ? `<span class="pill bids">${bidsTxt(a)}</span>` : ""}</div>
+      ${starBtn(a)}
+    </div>
+    <div class="body">
+      <div class="type"><i class="dot" style="background:var(${catColor[a.subcategorie] || "--c8"})"></i>${esc(a.type)}</div>
+      <h3><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.titlu)}</a></h3>
+      <div class="loc" title="Loc deținere">${ICON.pin}${esc(a.adresa || a.place || "Location unknown")}</div>
+      <div class="facts">
+        ${a.area ? `<span><b>${nf0.format(a.area)}</b> m²</span>` : ""}
+        ${a.rooms ? `<span><b>${a.rooms}</b> room${a.rooms > 1 ? "s" : ""}</span>` : ""}
+        ${a.zone ? `<span>${a.zone === "intra" ? "Intravilan" : "Extravilan"}</span>` : ""}
+        ${a.nrLicitatie ? `<span>${ordinal(a.nrLicitatie)} auction</span>` : ""}
+        ${a.garantie ? `<span>Guarantee <b>${short(a.garantie)}</b></span>` : ""}
+        ${a.minBid != null ? `<span title="${esc(BELOW_TIP(a))}">Bids from <b>${nf0.format(a.minBid)}</b></span>` : ""}
+      </div>
+      <div class="row" style="display:flex;flex-wrap:wrap;gap:4px">${(() => { const e = endsIn(a.endsTs); return `<span class="pill ${e.soon ? "soon" : "time"}">${e.txt}</span>`; })()}
+        ${a.changed ? `<span class="pill chg">Price ${a.pret < a.pretAnterior ? "↓" : "↑"}</span>` : ""}${a.share ? `<span class="pill share">Share ${esc(a.share)}</span>` : ""}</div>
+      <div class="foot">
+        <div><div class="price">${money(a.pret)}</div><div class="ppm">${a.pretEvaluare ? `Valued ${money(a.pretEvaluare)}` : ""}${a.pretEvaluare && a.ppm ? " · " : ""}${a.ppm ? `${nf0.format(a.ppm)} RON/m²` : ""}</div></div>
+        <div class="actions">
+          ${a.lat != null ? `<button class="iconbtn" type="button" data-map="${a.id}" title="Show on map" aria-label="Show on map">${ICON.map}</button>` : ""}
+          <a class="iconbtn" href="${esc(a.url)}" target="_blank" rel="noopener" title="Open on eLicitații" aria-label="Open on eLicitații">${ICON.ext}</a>
+        </div>
+      </div>
+    </div></article>`).join("");
+}
+
+/* ================= table */
+function renderTable() {
+  $("tbody").innerHTML = filtered.map(a => `<tr>
+    <td>${starBtn(a)}</td>
+    <td class="thumb">${a.imagine ? `<img src="${esc(a.imagine)}" alt="" loading="lazy">` : ""}</td>
+    <td><a class="t" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.titlu)}</a><span class="d">${esc(a.descriere || "")}</span></td>
+    <td class="nowrap">${esc(a.type)}</td>
+    <td>${esc(a.place || "—")}${a.adresa ? `<span class="d">${esc(a.adresa)}</span>` : ""}</td>
+    <td class="num">${a.area ? nf0.format(a.area) : "—"}</td>
+    <td class="num">${money(a.pret)}${a.changed ? `<br><span class="old">${money(a.pretAnterior)}</span>` : ""}</td>
+    <td class="num">${a.minBid != null ? `<span class="pill below" title="${esc(BELOW_TIP(a))}">${nf0.format(a.minBid)}</span>` : "—"}</td>
+    <td class="num">${a.ppm ? nf0.format(a.ppm) : "—"}</td>
+    <td class="num">${a.reducere ? `<span class="pill cut">−${a.reducere}%</span>` : ""}</td>
+    <td class="num">${a.nrOferte > 0 ? `<span class="pill bids">${a.nrOferte}</span>` : "—"}</td>
+    <td class="nowrap mono" style="font-size:.78rem">${dtShort(a.dataOraFinal)}</td>
+    <td>${a.lat != null ? `<button class="iconbtn" type="button" data-map="${a.id}" aria-label="Show on map" title="Show on map">${ICON.map}</button>` : ""}</td>
+  </tr>`).join("");
+  document.querySelectorAll("thead th[data-k]").forEach(th => th.toggleAttribute("data-dir", false));
+  if (tableSort) document.querySelector(`thead th[data-k="${tableSort.k}"]`)?.setAttribute("data-dir", tableSort.dir);
+}
+document.querySelectorAll("thead th[data-k]").forEach(th => th.addEventListener("click", () => {
+  const k = th.dataset.k;
+  tableSort = { k, dir: tableSort?.k === k && tableSort.dir === "asc" ? "desc" : "asc" };
+  render();
+}));
+
+/* ================= change log */
+function fmtVal(f, v) {
+  if (v == null || v === "") return "—";
+  if (f === "pret") return money(v);
+  if (f.startsWith("dataOra")) return dtLong(v);
+  if (f === "reducere") return v + "%";
+  if (f === "stare") return STATUS[v] || v;
+  if (f === "subcategorie") return typeLabel(v);
+  const s = String(v); return s.length > 160 ? s.slice(0, 160) + "…" : s;
+}
+function renderLog(live) {
+  const runs = LOG.map((r, i) => {
+    const facts = r.primaRulare ? `<span>First download · ${r.total} auctions</span>`
+      : `<span class="pill new">+${r.adaugate} new</span><span class="pill chg">${r.modificate} changed</span><span class="pill cut">−${r.eliminate} removed</span>`;
+    const ch = (r.schimbari || []).map(c => `<div class="chg">
+        <div><span class="kind ${c.tip}">${KIND[c.tip] || c.tip}</span><a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.titlu || "#" + c.id)}</a></div>
+        ${(c.campuri || []).map(f => `<div class="f"><span>${esc(FIELD[f.camp] || f.camp)}</span><span><del>${esc(fmtVal(f.camp, f.vechi))}</del> → <ins>${esc(fmtVal(f.camp, f.nou))}</ins></span></div>`).join("")}
+      </div>`).join("");
+    return `<details class="run" ${i === 0 && r.schimbari?.length ? "open" : ""}>
+      <summary><span class="when">${dtLong(r.data)}</span><span class="facts">${facts}<span>${r.total} total · ${r.cereriAnaf} ANAF requests · ${r.durata}s</span></span></summary>
+      ${ch || `<div class="chg" style="color:var(--muted)">${r.primaRulare ? "Baseline saved. Changes will appear from the next refresh." : "No changes since the previous refresh."}</div>`}
+    </details>`;
+  }).join("");
+  $("log").innerHTML = `<div><h2>Change log</h2>
+    <p class="lead">Each refresh compares the new list with the previous one and records new and removed auctions, and changes to price, status, dates or discount.</p></div>
+    ${live ? `<div class="livelog">${esc(live)}</div>` : ""}
+    ${runs || `<div class="empty"><b>No refreshes yet</b><span>Press Refresh to download the first list.</span></div>`}`;
+  const last = LOG[0];
+  const n = last && !last.primaRulare ? (last.schimbari || []).length : 0;
+  $("logBadge").textContent = n; $("logBadge").classList.toggle("hot", n > 0);
+}
+
+/* ================= filter UI */
+function chipGroup(el, opts, key, { multi = false, counts = null, swatch = null } = {}) {
+  el.innerHTML = opts.map(([v, label]) => {
+    const on = multi ? F[key].includes(v) : String(F[key]) === String(v);
+    const n = counts ? counts(v) : null;
+    return `<button class="chip" type="button" data-v="${esc(v)}" aria-pressed="${on}" ${n === 0 && !on ? "disabled" : ""}>
+      ${swatch ? `<i class="sw" style="background:var(${swatch(v)})"></i>` : ""}${esc(label)}${n != null ? `<span class="n">${n}</span>` : ""}</button>`;
+  }).join("");
+}
+function bindChips(el, key, multi, cast = v => v) {
+  el.addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    const v = cast(b.dataset.v);
+    if (multi) F[key] = F[key].includes(v) ? F[key].filter(x => x !== v) : [...F[key], v];
+    else F[key] = String(F[key]) === String(v) ? DEFAULT()[key] : v;
+    update();
+  });
+}
+bindChips($("fType"), "types", true);
+bindChips($("fRooms"), "rooms", false);
+bindChips($("fDisc"), "disc", false, Number);
+bindChips($("fEnds"), "ends", false, Number);
+bindChips($("fZone"), "zone", false);
+bindChips($("fRound"), "round", false);
+bindChips($("fBids"), "bids", false);
+bindChips($("fPrec"), "prec", false);
+function presetChips(el, presets, kMin, kMax) {
+  el.innerHTML = presets.map(([l, lo, hi], i) => `<button class="chip" type="button" data-i="${i}" aria-pressed="${String(F[kMin]) === String(lo) && String(F[kMax]) === String(hi)}">${l}</button>`).join("");
+}
+function bindPresets(el, presets, kMin, kMax) {
+  el.addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    const [, lo, hi] = presets[+b.dataset.i];
+    const on = String(F[kMin]) === String(lo) && String(F[kMax]) === String(hi);
+    F[kMin] = on ? "" : lo; F[kMax] = on ? "" : hi;
+    $(kMin).value = F[kMin]; $(kMax).value = F[kMax];
+    update();
+  });
+}
+bindPresets($("pPresets"), P_PRESETS, "pMin", "pMax");
+bindPresets($("aPresets"), A_PRESETS, "aMin", "aMax");
+let typing;
+["pMin", "pMax", "aMin", "aMax"].forEach(id => $(id).addEventListener("input", () => { F[id] = $(id).value.replace(/[^\d]/g, ""); clearTimeout(typing); typing = setTimeout(update, 250); }));
+$("q").addEventListener("input", () => { F.q = $("q").value; clearTimeout(typing); typing = setTimeout(update, 200); });
+[["fFull", "full"], ["fClean", "clean"], ["fBelow", "below"], ["fFav", "fav"], ["fFresh", "fresh"]].forEach(([id, k]) => $(id).addEventListener("change", () => { F[k] = $(id).checked; update(); }));
+$("countyQ").addEventListener("input", renderCounties);
+$("fCounty").addEventListener("change", e => {
+  const v = e.target.value; if (!v) return;
+  F.counties = e.target.checked ? [...F.counties, v] : F.counties.filter(x => x !== v);
+  update();
+});
+
+function renderCounties() {
+  const q = norm($("countyQ").value);
+  const all = [...new Set(ITEMS.map(a => a.judet).filter(Boolean))].sort((x, y) => x.localeCompare(y, "ro"));
+  const cnt = {}; ITEMS.forEach(a => { if (passAll(a, "counties")) cnt[a.judet] = (cnt[a.judet] || 0) + 1; });
+  const sel = all.filter(c => F.counties.includes(c)), rest = all.filter(c => !F.counties.includes(c));
+  $("fCounty").innerHTML = [...sel, ...rest].filter(c => !q || norm(c).includes(q)).map(c => `
+    <label class="citem ${cnt[c] ? "" : "zero"}"><input type="checkbox" value="${esc(c)}" ${F.counties.includes(c) ? "checked" : ""}>${esc(c)}<span class="n">${cnt[c] || 0}</span></label>`).join("");
+  $("countyHint").textContent = F.counties.length ? `${F.counties.length} selected` : `${all.length} counties`;
+}
+
+function renderFilters() {
+  const types = Object.keys(catColor);
+  const tcount = v => ITEMS.filter(a => a.subcategorie === v && passAll(a, "types")).length;
+  chipGroup($("fType"), types.map(t => [t, typeLabel(t)]), "types", { multi: true, counts: tcount, swatch: v => catColor[v] });
+  chipGroup($("fRooms"), ROOMS, "rooms", { counts: v => v ? ITEMS.filter(a => passAll(a, "rooms") && a.rooms != null && (v === "4" ? a.rooms >= 4 : a.rooms === +v)).length : null });
+  chipGroup($("fDisc"), DISC, "disc", { counts: v => v ? ITEMS.filter(a => passAll(a, "disc") && (a.reducere || 0) >= v).length : null });
+  chipGroup($("fEnds"), ENDS, "ends", { counts: v => v ? ITEMS.filter(a => passAll(a, "ends") && a.endsTs - Date.now() <= v * 36e5).length : null });
+  chipGroup($("fZone"), ZONE, "zone", { counts: v => v ? ITEMS.filter(a => passAll(a, "zone") && a.zone === v).length : null });
+  const cnt = (key, v) => { const keep = F[key]; F[key] = v; const n = ITEMS.filter(a => passAll(a)).length; F[key] = keep; return n; };
+  chipGroup($("fRound"), ROUND, "round", { counts: v => v ? cnt("round", v) : null });
+  chipGroup($("fBids"), BIDS, "bids", { counts: v => v ? cnt("bids", v) : null });
+  const reads = ITEMS.map(a => a.citit).filter(Boolean).sort();
+  $("bidsHint").textContent = reads.length ? `checked ${ago(reads.at(-1))} to ${ago(reads[0])}` : "from each auction page";
+  chipGroup($("fPrec"), PREC, "prec", { counts: v => v ? cnt("prec", v) : null });
+  presetChips($("pPresets"), P_PRESETS, "pMin", "pMax");
+  presetChips($("aPresets"), A_PRESETS, "aMin", "aMax");
+  $("q").value = F.q; ["pMin", "pMax", "aMin", "aMax"].forEach(k => { if (document.activeElement !== $(k)) $(k).value = F[k]; });
+  $("fFull").checked = F.full; $("fClean").checked = F.clean; $("fBelow").checked = F.below; $("fFav").checked = F.fav; $("fFresh").checked = F.fresh;
+  $("favCount").textContent = favs.size ? `${favs.size} saved` : "Star an auction to save it";
+  renderCounties();
+}
+
+function activeList() {
+  const L = [];
+  const rng = (lo, hi, unit) => lo && hi ? `${short(+lo)}–${short(+hi)} ${unit}` : lo ? `≥ ${short(+lo)} ${unit}` : `≤ ${short(+hi)} ${unit}`;
+  if (F.q) L.push([`“${F.q}”`, () => F.q = ""]);
+  F.types.forEach(t => L.push([typeLabel(t), () => F.types = F.types.filter(x => x !== t)]));
+  if (F.pMin || F.pMax) L.push([rng(F.pMin, F.pMax, "RON"), () => { F.pMin = F.pMax = ""; }]);
+  if (F.aMin || F.aMax) L.push([rng(F.aMin, F.aMax, "m²"), () => { F.aMin = F.aMax = ""; }]);
+  if (F.rooms) L.push([`${F.rooms === "4" ? "4+" : F.rooms} room${F.rooms === "1" ? "" : "s"}`, () => F.rooms = ""]);
+  if (F.disc) L.push([`Discount ${F.disc}%+`, () => F.disc = 0]);
+  if (F.ends) L.push([ENDS.find(e => e[0] === F.ends)[1], () => F.ends = 0]);
+  if (F.zone) L.push([F.zone === "intra" ? "Intravilan" : "Extravilan", () => F.zone = ""]);
+  if (F.full) L.push(["Full ownership", () => F.full = false]);
+  if (F.clean) L.push(["No encumbrances", () => F.clean = false]);
+  if (F.below) L.push(["Bids below start", () => F.below = false]);
+  if (F.bids) L.push([BIDS.find(b => b[0] === F.bids)[1], () => F.bids = ""]);
+  if (F.round) L.push([ROUND.find(r => r[0] === F.round)[1], () => F.round = ""]);
+  if (F.prec) L.push([PREC.find(r => r[0] === F.prec)[1], () => F.prec = ""]);
+  if (F.fav) L.push(["Favorites", () => F.fav = false]);
+  if (F.fresh) L.push(["New / price changed", () => F.fresh = false]);
+  F.counties.forEach(c => L.push([c, () => F.counties = F.counties.filter(x => x !== c)]));
+  return L;
+}
+function renderActive() {
+  const L = activeList();
+  $("activeChips").innerHTML = L.map(([l], i) => `<span class="achip">${esc(l)}<button type="button" data-i="${i}" aria-label="Remove ${esc(l)}">×</button></span>`).join("") +
+    (L.length > 1 ? `<button class="linkbtn" type="button" data-all>Clear all</button>` : "");
+  $("activeChips").onclick = e => {
+    if (e.target.closest("[data-all]")) return reset();
+    const b = e.target.closest("button[data-i]"); if (!b) return;
+    L[+b.dataset.i][1](); update();
+  };
+  $("fCountBadge").hidden = !L.length; $("fCountBadge").textContent = L.length;
+  $("resetBtn").disabled = !L.length;
+}
+
+/* ================= sort + render */
+const SORTS = {
+  ends: (a, b) => a.endsTs - b.endsTs,
+  priceAsc: (a, b) => (a.pret ?? Infinity) - (b.pret ?? Infinity),
+  priceDesc: (a, b) => (b.pret ?? -1) - (a.pret ?? -1),
+  disc: (a, b) => (b.reducere || 0) - (a.reducere || 0) || a.endsTs - b.endsTs,
+  ppm: (a, b) => (a.ppm ?? Infinity) - (b.ppm ?? Infinity),
+  minBid: (a, b) => (a.minBid ?? a.pret ?? Infinity) - (b.minBid ?? b.pret ?? Infinity),
+  area: (a, b) => (b.area ?? -1) - (a.area ?? -1),
+  bids: (a, b) => (b.nrOferte || 0) - (a.nrOferte || 0) || a.endsTs - b.endsTs,
+  newest: (a, b) => b.seenTs - a.seenTs || b.id - a.id
+};
+function sorter() {
+  if (tableSort && !$("tableView").hidden) {
+    const { k, dir } = tableSort, s = dir === "asc" ? 1 : -1;
+    return (a, b) => { let x = a[k], y = b[k]; if (x == null || x === "") return 1; if (y == null || y === "") return -1;
+      if (typeof x === "string") return x.localeCompare(y, "ro") * s; return (x - y) * s; };
+  }
+  return SORTS[sortKey] || SORTS.ends;
+}
+function render() {
+  filtered = ITEMS.filter(a => passAll(a)).sort(sorter());
+  $("result").innerHTML = `<b>${filtered.length}</b> of ${ITEMS.length} auctions`;
+  const view = document.querySelector(".tab[aria-selected=true]").dataset.view;
+  $("empty").hidden = filtered.length > 0 || view === "logView";
+  renderMap(); renderCards(); renderTable();
+}
+function saveState() {
+  const d = DEFAULT(), out = {};
+  for (const k in F) if (JSON.stringify(F[k]) !== JSON.stringify(d[k])) out[k] = F[k];
+  const qs = Object.keys(out).length ? "?f=" + encodeURIComponent(JSON.stringify(out)) : location.pathname;
+  history.replaceState(null, "", qs + location.hash);
+  store.set("elic-filters", out);
+}
+function loadState() {
+  let s = null;
+  try { const p = new URLSearchParams(location.search).get("f"); if (p) s = JSON.parse(p); } catch {}
+  F = Object.assign(DEFAULT(), s || store.get("elic-filters", {}));
+}
+function update() { renderFilters(); renderActive(); render(); saveState(); }
+function reset() { F = DEFAULT(); $("countyQ").value = ""; update(); }
+$("resetBtn").addEventListener("click", reset);
+$("emptyReset").addEventListener("click", reset);
+$("sort").value = sortKey;
+$("sort").addEventListener("change", () => { sortKey = $("sort").value; tableSort = null; store.set("elic-sort", sortKey); render(); });
+
+/* favorites + map buttons (delegated) */
+function toggleFav(id) {
+  favs.has(id) ? favs.delete(id) : favs.add(id);
+  store.set("elic-favs", [...favs]);
+  document.querySelectorAll(`[data-fav="${id}"]`).forEach(b => b.setAttribute("aria-pressed", favs.has(id)));
+  toast(favs.has(id) ? "Saved to favorites" : "Removed from favorites");
+  $("favCount").textContent = favs.size ? `${favs.size} saved` : "Star an auction to save it";
+  if (F.fav) update();
+}
+document.addEventListener("click", e => {
+  const f = e.target.closest("[data-fav]");
+  if (f) return toggleFav(+f.dataset.fav);
+  const m = e.target.closest("[data-map]");
+  if (m) showOnMap(+m.dataset.map);
+});
+// Leaflet stops clicks inside popups from bubbling, so wire the popup's star directly
+map.on("popupopen", e => {
+  const b = e.popup.getElement()?.querySelector("[data-fav]");
+  if (b) L.DomEvent.on(b, "click", ev => { L.DomEvent.stop(ev); toggleFav(+b.dataset.fav); });
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => ITEMS.length && renderMap());
+
+/* CSV export */
+$("csvBtn").addEventListener("click", () => {
+  const cols = [["ID", a => a.id], ["Title", a => a.titlu], ["Type", a => a.type], ["County", a => a.judet], ["Locality", a => a.localitate],
+    ["Area m2", a => a.area ? Math.round(a.area) : ""], ["Starting price RON", a => a.pret], ["RON per m2", a => a.ppm ? Math.round(a.ppm) : ""],
+    ["Discount %", a => a.reducere || ""], ["Valuation RON", a => a.pretEvaluare ?? ""], ["Lowest valid bid RON (2+ bidders)", a => a.minBid ?? ""], ["Guarantee RON", a => a.garantie ?? ""],
+    ["Min bid step RON", a => a.pasMinim ?? ""], ["Auction round", a => a.nrLicitatie ?? ""], ["Bids", a => a.nrOferte ?? ""], ["Bids checked", a => a.citit || ""], ["Loc detinere", a => a.adresa || ""],
+    ["Phone", a => a.telefon || ""], ["Encumbrances", a => a.sarcini || ""], ["Pin accuracy", a => a.precizie || ""], ["Share", a => a.share || ""], ["Zone", a => a.zone || ""], ["Starts", a => a.dataOraStart], ["Ends", a => a.dataOraFinal],
+    ["URL", a => a.url], ["Description", a => a.descriere]];
+  const q = v => `"${String(v ?? "").replace(/"/g, '""').replace(/\s+/g, " ")}"`;
+  const csv = "﻿" + [cols.map(c => q(c[0])).join(","), ...filtered.map(a => cols.map(c => q(c[1](a))).join(","))].join("\r\n");
+  const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  const link = Object.assign(document.createElement("a"), { href: url, download: `anaf-auctions-${new Date().toISOString().slice(0, 10)}.csv` });
+  document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast(`Exported ${filtered.length} auctions`);
+});
+
+/* ================= tabs + drawer */
+function selectTab(view) {
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.view === view)));
+  document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== view);
+  $("empty").hidden = filtered.length > 0 || view === "logView";
+  if (view === "mapView") setTimeout(() => map.invalidateSize(), 0);
+  if (view !== "tableView" && tableSort) { tableSort = null; render(); }
+  store.set("elic-tab", view);
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => selectTab(t.dataset.view)));
+const drawer = on => document.body.classList.toggle("drawer", on);
+$("openSide").addEventListener("click", () => drawer(true));
+$("closeSide").addEventListener("click", () => drawer(false));
+$("scrim").addEventListener("click", () => drawer(false));
+document.addEventListener("keydown", e => { if (e.key === "Escape") drawer(false); });
+
+/* ================= data + refresh */
+async function load(first) {
+  try {
+    const [a, l] = await Promise.all([fetch("data/auctions.json").then(r => r.json()), fetch("data/changelog.json").then(r => r.json())]);
+    DATA = a && a.items ? a : { items: [] }; LOG = Array.isArray(l) ? l : [];
+  } catch {
+    $("meta").textContent = "Open this page through the local server: python3 server.py";
+    $("refreshBtn").disabled = true; return;
+  }
+  ITEMS = DATA.items.map(enrich);
+  [...new Set(ITEMS.map(a => a.subcategorie).filter(Boolean))].sort((x, y) => ITEMS.filter(a => a.subcategorie === y).length - ITEMS.filter(a => a.subcategorie === x).length)
+    .forEach((c, i) => catColor[c] = `--c${(i % 8) + 1}`);
+  const disc = ITEMS.filter(a => a.reducere).length;
+  $("meta").textContent = DATA.actualizat
+    ? `${ITEMS.length} live auctions · ${disc} discounted · updated ${dtShort(DATA.actualizat)}`
+    : "Nothing downloaded yet. Press Refresh.";
+  F.types = F.types.filter(t => catColor[t]);
+  update(); renderLog();
+  if (first) fitResults();
+}
+
+const STEP = { listare: "auction list", judete: "counties", detalii: "new auction details", geocodare: "map locations" };
+let polling = null;
+async function poll() {
+  const s = await fetch("api/status").then(r => r.json()).catch(() => null);
+  if (!s) return;
+  const btn = $("refreshBtn");
+  btn.disabled = s.running; btn.classList.toggle("busy", s.running);
+  $("status").classList.toggle("err", !!s.eroare);
+  if (s.running) {
+    $("status").textContent = `Updating ${STEP[s.etapa] || ""}${s.total ? ` ${s.curent}/${s.total}` : s.pagina ? ` · page ${s.pagina}` : ""}…`;
+    if (!$("logView").hidden) renderLog(s.log.join("\n"));
+    if (!polling) polling = setInterval(poll, 2000);
+  } else {
+    if (polling) { clearInterval(polling); polling = null; await load(); toast(s.eroare ? "Refresh failed" : "List updated"); }
+    $("status").textContent = s.eroare ? `Refresh failed: ${s.eroare}` : "";
+  }
+}
+$("refreshBtn").addEventListener("click", async () => {
+  const r = await fetch("api/refresh", { method: "POST" }).catch(() => null);
+  if (!r) { $("status").textContent = "The local server isn't running. Start it with start.command or python3 server.py."; return; }
+  const j = await r.json();
+  if (r.status !== 202) { $("status").textContent = j.mesaj; return; }
+  $("status").textContent = "Refresh started…";
+  poll();
+});
+
+loadState();
+{ const t = store.get("elic-tab", "mapView"); if ($(t)) selectTab(t); }
+load(true).then(poll);
+setInterval(() => { if (!document.hidden && ITEMS.length) render(); }, 60000); // keep "ends in" fresh
+</script>
+</body>
+</html>
