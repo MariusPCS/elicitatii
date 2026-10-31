@@ -169,6 +169,13 @@ aside.side {
 #map .leaflet-tile-pane { filter: var(--tile-filter); }
 .mapctl { position: absolute; z-index: 500; top: 12px; right: 12px; display: flex; gap: 6px; }
 .mapctl .btn { box-shadow: var(--shadow); }
+.mapctl .btn.ico { padding: 7px 9px; }
+/* full-screen map: the map view covers the whole page (plus the browser's own full screen where allowed) */
+body.mapfull #mapView { position: fixed; inset: 0; z-index: 1300; grid-template-columns: minmax(0, 1fr); background: var(--bg); }
+body.mapfull .maplist { display: none; }
+body.mapfull .mapctl { top: calc(12px + env(safe-area-inset-top, 0px)); }
+#fullBtn .shrink, body.mapfull #fullBtn .grow { display: none; }
+body.mapfull #fullBtn .shrink { display: block; }
 .legend {
   position: absolute; z-index: 500; left: 12px; bottom: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
   padding: 8px 12px; font-size: .76rem; display: grid; gap: 3px; box-shadow: var(--shadow);
@@ -193,6 +200,7 @@ aside.side {
 .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); }
 .leaflet-popup-content-wrapper { padding: 0; overflow: hidden; border-radius: var(--r); }
 .leaflet-popup-content { margin: 0; width: 290px !important; }
+@media (max-width: 640px) { .leaflet-popup-content { width: min(290px, 78vw) !important; max-height: 62vh; overflow-y: auto; } }
 .leaflet-container a.leaflet-popup-close-button { color: var(--accent-ink); background: rgba(0,0,0,.35); border-radius: 50%; top: 6px; right: 6px; width: 22px; height: 22px; line-height: 20px; }
 
 /* shared card bits */
@@ -456,7 +464,13 @@ td.thumb img { width: 56px; height: 40px; object-fit: cover; border-radius: 6px;
       <section class="view" id="mapView" role="tabpanel">
         <div class="mapwrap">
           <div id="map"></div>
-          <div class="mapctl"><button class="btn" id="fitBtn" type="button">Zoom to results</button></div>
+          <div class="mapctl">
+            <button class="btn" id="fitBtn" type="button">Zoom to results</button>
+            <button class="btn ico" id="fullBtn" type="button" title="Full screen" aria-label="Full screen" aria-pressed="false">
+              <svg class="grow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+              <svg class="shrink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+            </button>
+          </div>
           <div class="legend" id="legend"></div>
         </div>
         <div class="maplist" id="mapList"></div>
@@ -608,7 +622,8 @@ const TESTS = {
 const passAll = (a, skip) => Object.entries(TESTS).every(([k, t]) => k === skip || t(a));
 
 /* ================= map */
-const map = L.map("map", { zoomControl: true }).setView([45.9, 24.9], 7);
+// closePopupOnClick is handled below: on phones the tap that opens a pin also reaches the map and closed it at once
+const map = L.map("map", { zoomControl: true, closePopupOnClick: false }).setView([45.9, 24.9], 7);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
 const cluster = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 45 });
 map.addLayer(cluster);
@@ -629,6 +644,7 @@ function popupHtml(a) {
     </div></div>`;
 }
 function renderMap() {
+  const open = [...markers].find(([, m]) => m.isPopupOpen())?.[0]; // reopened below, so the 60 s refresh doesn't close it
   cluster.clearLayers(); markers.clear();
   const list = [];
   for (const a of filtered) {
@@ -638,6 +654,7 @@ function renderMap() {
     markers.set(a.id, m); list.push(m);
   }
   cluster.addLayers(list);
+  if (open && markers.has(open)) markers.get(open).openPopup();
   const cats = Object.keys(catColor);
   $("legend").innerHTML = cats.map(c => `<span><i class="dot" style="background:var(${catColor[c]})"></i>${esc(typeLabel(c))}</span>`).join("") +
     `<span class="approx"><i class="ring"></i>Dashed = county only (approximate)</span>`;
@@ -667,6 +684,24 @@ $("mapList").addEventListener("click", e => { const b = e.target.closest(".mini"
 $("mapList").addEventListener("mouseover", e => { const b = e.target.closest(".mini"); if (b) highlight(b.dataset.id, true); });
 $("mapList").addEventListener("mouseout", e => { const b = e.target.closest(".mini"); if (b) highlight(b.dataset.id, false); });
 $("fitBtn").addEventListener("click", fitResults);
+let popupAt = 0;
+map.on("popupopen", () => popupAt = Date.now());
+map.on("click", () => { if (Date.now() - popupAt > 500) map.closePopup(); });
+
+function setMapFull(on) {
+  document.body.classList.toggle("mapfull", on);
+  $("fullBtn").setAttribute("aria-pressed", String(on));
+  $("fullBtn").title = $("fullBtn").ariaLabel = on ? "Exit full screen" : "Full screen";
+  setTimeout(() => map.invalidateSize(), 60);
+}
+$("fullBtn").addEventListener("click", () => {
+  const on = !document.body.classList.contains("mapfull");
+  setMapFull(on);
+  if (on && !document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+  if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {});
+});
+// leaving the browser's full screen (back gesture, Esc) also leaves the full-screen map
+document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement) setMapFull(false); });
 
 /* ================= cards */
 function badges(a) {
@@ -1032,7 +1067,7 @@ const drawer = on => document.body.classList.toggle("drawer", on);
 $("openSide").addEventListener("click", () => drawer(true));
 $("closeSide").addEventListener("click", () => drawer(false));
 $("scrim").addEventListener("click", () => drawer(false));
-document.addEventListener("keydown", e => { if (e.key === "Escape") drawer(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { drawer(false); setMapFull(false); } });
 
 /* ================= data + refresh */
 async function load(first) {
