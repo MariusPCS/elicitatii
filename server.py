@@ -73,7 +73,7 @@ class Handler(SimpleHTTPRequestHandler):
             last = s["terminat"] or 0
             s["urmatorulPosibil"] = max(0, round(last + COOLDOWN - time.time())) if not s["eroare"] else 0
             return self.send_json(200, s)
-        if path in ("/", "/index.html") or path in ("/data/auctions.json", "/data/changelog.json"):
+        if path in ("/", "/index.html", "/manifest.webmanifest", "/icon.svg") or path in ("/data/auctions.json", "/data/changelog.json"):
             if path.startswith("/data/") and not (ROOT / path.lstrip("/")).exists():
                 return self.send_json(200, {} if "auctions" in path else [])
             return super().do_GET()

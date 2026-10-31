@@ -1,0 +1,70 @@
+# Refresh the auction data from elicitatii.anaf.ro and publish the viewer on GitHub Pages.
+# Runs only when started by hand (Actions → "Refresh auctions" → Run workflow).
+# A push to main redeploys the page without scraping.
+name: Refresh auctions
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore: ["data/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          python-version: "3.12"
+
+      # same 10-minute lock as the Refresh button in server.py
+      - name: Check cooldown
+        id: cooldown
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          last=$(git log -1 --format=%ct --grep='^data: refresh' || true)
+          if [ -n "$last" ] && [ $(( $(date +%s) - last )) -lt 600 ]; then
+            echo "::notice::The last refresh was less than 10 minutes ago – skipping the scrape."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Scrape
+        if: github.event_name == 'workflow_dispatch' && steps.cooldown.outputs.skip != 'true'
+        run: python scraper.py
+
+      - name: Commit data
+        if: github.event_name == 'workflow_dispatch' && steps.cooldown.outputs.skip != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/*.json
+          git diff --cached --quiet || git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
+
+      - name: Build site
+        run: |
+          mkdir -p _site/data
+          cp index.html manifest.webmanifest icon.svg _site/
+          cp data/auctions.json data/changelog.json _site/data/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4

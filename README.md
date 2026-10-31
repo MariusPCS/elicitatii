@@ -17,6 +17,18 @@ python3 server.py --no-browser --port 8765
 It needs only Python 3, with no extra packages. The page must be opened through the server: opening
 `index.html` directly can't load the data or run a refresh. The server listens on `127.0.0.1` only.
 
+## On your phone (GitHub Pages)
+
+The viewer is also published at **https://mariuspcs.github.io/elicitatii/**. In Chrome on Android,
+open the menu and choose *Add to Home screen* to get a full-screen app icon.
+
+The data only updates when you ask, because there's no schedule. On the page, tap **Refresh**. It opens the
+[Refresh auctions](https://github.com/MariusPCS/elicitatii/actions/workflows/refresh.yml) workflow
+on GitHub. Tap *Run workflow* there, wait a few minutes for the run to finish, then reload the page. The
+workflow runs `scraper.py`, commits `data/*.json` back to the repo (so the caches carry over), and
+redeploys the page. It skips the scrape if the last one was less than 10 minutes ago.
+Pushing code to `main` redeploys the page without scraping.
+
 ## What you can do
 
 - **Map:** pins are placed from each auction's *Loc deținere* address. A pin is street-level when the

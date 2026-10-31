@@ -1,0 +1,12 @@
+{
+  "name": "ANAF Property Auctions",
+  "short_name": "Licitații",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f4f3",
+  "theme_color": "#0f6e66",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

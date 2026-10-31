@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ANAF Property Auctions</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0f6e66">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -1034,10 +1037,11 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") drawer(false
 /* ================= data + refresh */
 async function load(first) {
   try {
-    const [a, l] = await Promise.all([fetch("data/auctions.json").then(r => r.json()), fetch("data/changelog.json").then(r => r.json())]);
+    const t = `?t=${Date.now()}`; // GitHub Pages caches for ~10 min
+    const [a, l] = await Promise.all([fetch("data/auctions.json" + t).then(r => r.json()), fetch("data/changelog.json" + t).then(r => r.json())]);
     DATA = a && a.items ? a : { items: [] }; LOG = Array.isArray(l) ? l : [];
   } catch {
-    $("meta").textContent = "Open this page through the local server: python3 server.py";
+    $("meta").textContent = "Couldn't load the data. Open this page online or through python3 server.py";
     $("refreshBtn").disabled = true; return;
   }
   ITEMS = DATA.items.map(enrich);
@@ -1053,10 +1057,16 @@ async function load(first) {
 }
 
 const STEP = { listare: "auction list", judete: "counties", detalii: "new auction details", geocodare: "map locations" };
-let polling = null;
+// On GitHub Pages there is no server: Refresh opens the workflow page, where "Run workflow" starts the scrape.
+const WORKFLOW = "https://github.com/MariusPCS/elicitatii/actions/workflows/refresh.yml";
+let polling = null, STATIC = false;
 async function poll() {
-  const s = await fetch("api/status").then(r => r.json()).catch(() => null);
-  if (!s) return;
+  const s = await fetch("api/status").then(r => r.ok ? r.json() : null).catch(() => null);
+  if (!s) {
+    STATIC = true;
+    $("refreshBtn").title = "Run the update on GitHub (takes a few minutes), then reload this page";
+    return;
+  }
   const btn = $("refreshBtn");
   btn.disabled = s.running; btn.classList.toggle("busy", s.running);
   $("status").classList.toggle("err", !!s.eroare);
@@ -1070,6 +1080,11 @@ async function poll() {
   }
 }
 $("refreshBtn").addEventListener("click", async () => {
+  if (STATIC) {
+    window.open(WORKFLOW, "_blank", "noopener");
+    $("status").textContent = "Tap “Run workflow” on GitHub, then reload here in a few minutes.";
+    return;
+  }
   const r = await fetch("api/refresh", { method: "POST" }).catch(() => null);
   if (!r) { $("status").textContent = "The local server isn't running. Start it with start.command or python3 server.py."; return; }
   const j = await r.json();
