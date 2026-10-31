@@ -1503,5 +1503,191 @@
   46.9818262,
   21.7093859,
   "village"
+ ],
+ "v2|38|{\"city\": \"dragasani\", \"country\": \"romania\", \"county\": \"valcea\", \"street\": \"166 strada primaverii\"}": [
+  44.6658568,
+  24.2668885,
+  "tertiary"
+ ],
+ "v2|3|{\"q\": \"moraresti, arges\"}": [
+  45.0073277,
+  24.5627837,
+  "municipality"
+ ],
+ "v2|area:30": {
+  "bbox": [
+   47.3331998,
+   48.1199956,
+   22.1808243,
+   23.6398531
+  ],
+  "center": [
+   47.7265907,
+   22.7519873
+  ]
+ },
+ "v2|30|{\"q\": \"odoreu, satu mare\"}": [
+  47.7969878,
+  22.9936732,
+  "municipality"
+ ],
+ "v2|2|{\"q\": \"pilu, arad\"}": [
+  46.576265,
+  21.3471454,
+  "municipality"
+ ],
+ "v2|28|{\"city\": \"draganesti olt\", \"country\": \"romania\", \"county\": \"olt\", \"street\": \"24-28 strada foisor\"}": null,
+ "v2|28|{\"city\": \"draganesti olt\", \"country\": \"romania\", \"county\": \"olt\", \"street\": \"24 strada foisor\"}": null,
+ "v2|28|{\"city\": \"draganesti olt\", \"country\": \"romania\", \"county\": \"olt\", \"street\": \"strada foisor\"}": null,
+ "v2|28|{\"q\": \"draganesti olt, olt\"}": null,
+ "v2|25|{\"city\": \"drobeta turnu severin\", \"country\": \"romania\", \"county\": \"mehedinti\", \"street\": \"14 aleea nuferilor\"}": null,
+ "v2|25|{\"city\": \"drobeta turnu severin\", \"country\": \"romania\", \"county\": \"mehedinti\", \"street\": \"aleea nuferilor\"}": null,
+ "v2|25|{\"q\": \"drobeta turnu severin, mehedinti\"}": null,
+ "v2|15|{\"city\": \"nisipurile\", \"country\": \"romania\", \"county\": \"dambovita\", \"street\": \"strada zarnesti\"}": null,
+ "v2|15|{\"q\": \"nisipurile, dambovita\"}": [
+  44.9112494,
+  25.5349329,
+  "village"
+ ],
+ "v2|25|{\"city\": \"drobeta turnu severin\", \"country\": \"romania\", \"county\": \"mehedinti\", \"street\": \"161 calea timisoarei\"}": null,
+ "v2|25|{\"city\": \"drobeta turnu severin\", \"country\": \"romania\", \"county\": \"mehedinti\", \"street\": \"calea timisoarei\"}": null,
+ "v2|12|{\"city\": \"uat floresti\", \"country\": \"romania\", \"county\": \"cluj\", \"street\": \"6 strada sesul de sus\"}": null,
+ "v2|12|{\"city\": \"uat floresti\", \"country\": \"romania\", \"county\": \"cluj\", \"street\": \"strada sesul de sus\"}": null,
+ "v2|5|{\"city\": \"beius\", \"country\": \"romania\", \"county\": \"bihor\", \"street\": \"20 strada horea\"}": [
+  46.6669611,
+  22.3415242,
+  "primary"
+ ],
+ "v2|17|{\"q\": \"extravilanul comunei cuza voda, galati\"}": null,
+ "v2|17|{\"q\": \"cuza voda, galati\"}": [
+  45.5883991,
+  27.8260728,
+  "municipality"
+ ],
+ "v2|32|{\"q\": \"sibiu, sibiu\"}": [
+  45.7973912,
+  24.1519202,
+  "city"
+ ],
+ "v2|26|{\"q\": \"chendu, mures\"}": [
+  46.387071,
+  24.7306896,
+  "village"
+ ],
+ "v2|30|{\"q\": \"botiz, satu mare\"}": [
+  47.8290355,
+  22.9476679,
+  "municipality"
+ ],
+ "v2|26|{\"q\": \"solovastru, mures\"}": [
+  46.7780855,
+  24.7737965,
+  "municipality"
+ ],
+ "v2|26|{\"city\": \"reghin\", \"country\": \"romania\", \"county\": \"mures\", \"street\": \"strada mihai eminescu\"}": [
+  46.7901938,
+  24.6904489,
+  "residential"
+ ],
+ "v2|33|{\"q\": \"malini, suceava\"}": [
+  47.4542559,
+  26.0856829,
+  "municipality"
+ ],
+ "v2|24|{\"city\": \"coltau\", \"country\": \"romania\", \"county\": \"maramures\", \"street\": \"25 strada petofi sandor\"}": null,
+ "v2|24|{\"city\": \"coltau\", \"country\": \"romania\", \"county\": \"maramures\", \"street\": \"strada petofi sandor\"}": null,
+ "v2|24|{\"q\": \"coltau, maramures\"}": [
+  47.5983047,
+  23.5238627,
+  "municipality"
+ ],
+ "v2|16|{\"city\": \"cotofenii din fata\", \"country\": \"romania\", \"county\": \"dolj\", \"street\": \"79 strada cotofenilor\"}": null,
+ "v2|16|{\"city\": \"cotofenii din fata\", \"country\": \"romania\", \"county\": \"dolj\", \"street\": \"strada cotofenilor\"}": null,
+ "v2|16|{\"q\": \"cotofenii din fata, dolj\"}": [
+  44.4517006,
+  23.6519888,
+  "municipality"
+ ],
+ "v2|31|{\"q\": \"almasu, salaj\"}": [
+  46.945452,
+  23.132898,
+  "municipality"
+ ],
+ "v2|16|{\"city\": \"craiova\", \"country\": \"romania\", \"county\": \"dolj\", \"street\": \"bulevardul oltenia\"}": [
+  44.3384366,
+  23.7730139,
+  "tertiary"
+ ],
+ "v2|32|{\"q\": \"jina, sibiu\"}": [
+  45.7842265,
+  23.6799637,
+  "municipality"
+ ],
+ "v2|20|{\"q\": \"beriu, hunedoara\"}": [
+  45.790253,
+  23.1910468,
+  "village"
+ ],
+ "v2|18|{\"q\": \"dragotesti, gorj\"}": [
+  44.8092671,
+  23.1466279,
+  "municipality"
+ ],
+ "v2|27|{\"q\": \"ceahlau, neamt\"}": [
+  47.0417537,
+  25.9626341,
+  "municipality"
+ ],
+ "v2|5|{\"q\": \"gepiu, bihor\"}": [
+  46.9303405,
+  21.7901591,
+  "municipality"
+ ],
+ "v2|11|{\"city\": \"oravita\", \"country\": \"romania\", \"county\": \"caras-severin\", \"street\": \"80 strada eftimie murgu\"}": [
+  45.0360023,
+  21.7103901,
+  "primary"
+ ],
+ "v2|6|{\"q\": \"sieu-extravilan, bistrita-nasaud\"}": null,
+ "v2|6|{\"q\": \"ardan, bistrita-nasaud\"}": [
+  47.029898,
+  24.6721921,
+  "village"
+ ],
+ "v2|14|{\"q\": \"bacel, covasna\"}": [
+  45.757869,
+  25.8222242,
+  "village"
+ ],
+ "v2|28|{\"city\": \"vladila\", \"country\": \"romania\", \"county\": \"olt\", \"street\": \"4 strada mircea cel batran\"}": [
+  43.9969742,
+  24.4064968,
+  "residential"
+ ],
+ "v2|16|{\"q\": \"pielesti, dolj\"}": [
+  44.3410397,
+  23.9630113,
+  "municipality"
+ ],
+ "v2|35|{\"city\": \"lugoj\", \"country\": \"romania\", \"county\": \"timis\", \"street\": \"66 strada strugurilor\"}": [
+  45.7001841,
+  21.9266465,
+  "residential"
+ ],
+ "v2|29|{\"q\": \"iazu, prahova\"}": [
+  45.0830727,
+  26.0199283,
+  "village"
+ ],
+ "v2|25|{\"city\": \"drobeta-turnu severin\", \"country\": \"romania\", \"county\": \"mehedinti\", \"street\": \"161 calea timisoarei\"}": [
+  44.6247687,
+  22.6159834,
+  "building"
+ ],
+ "v2|11|{\"q\": \"remetea poganici, caras-severin\"}": null,
+ "v2|11|{\"q\": \"farliug, caras-severin\"}": [
+  45.4883333,
+  21.8494444,
+  "municipality"
  ]
 }

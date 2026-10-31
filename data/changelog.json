@@ -1,5 +1,1426 @@
 [
  {
+  "data": "2026-10-31T21:03:13+0000",
+  "durata": 776,
+  "cereriAnaf": 112,
+  "total": 146,
+  "primaRulare": false,
+  "adaugate": 47,
+  "modificate": 3,
+  "eliminate": 68,
+  "schimbari": [
+   {
+    "tip": "adaugat",
+    "id": 517821,
+    "titlu": "Teren agricol - intravilan in suprafata de 4998 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029353000000031031-teren-agricol-intravilan-in-suprafata-de-4998-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 518000,
+    "titlu": "Teren agricol -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033633000000031210-teren-agricol"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517913,
+    "titlu": "Pasune - TEREN EXTRAVILAN",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029867000000031123-pasune-teren-extravilan"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517818,
+    "titlu": "Cota de 1/2 din teren extravilan in suprafata de 2900 MP situat in com. Odoreu, jud. Satu Mare",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033609000000031028-cota-de-1-2-din-teren-extravilan-in-suprafata-de-2900-mp-situat-in-com-odoreu-jud-satu-mare"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517830,
+    "titlu": "cota de 1/1 din Teren Extravilan/Arabil , 23000 MP, Pilu, jud. Arad",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029744000000031040-cota-de-1-1-din-teren-extravilan-arabil-23000-mp-pilu-jud-arad"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517832,
+    "titlu": "TEREN EXTRAVILAN IN SUPRAFATA DE 9500 MP, INREGISTRAT IN CF NR. 53650 TURDA",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600013161000000031042-teren-extravilan-in-suprafata-de-9500-mp-inregistrat-in-cf-nr-53650-turda"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517834,
+    "titlu": "Ansamblul de bunuri",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600013279000000031044-ansamblul-de-bunuri"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517861,
+    "titlu": "Garsoniera 1 camera",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029799000000031071-garsoniera-1-camera"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517955,
+    "titlu": "Teren intravilan - in suprafata de 1250 mp, situat in UAT Ulmi, loc. Nisipurile, jud. Dambovita",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022790000000031165-teren-intravilan-in-suprafata-de-1250-mp-situat-in-uat-ulmi-loc-nisipurile-jud-dambovita"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517860,
+    "titlu": "Garsoniera 1 camera",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029793000000031070-garsoniera-1-camera"
+   },
+   {
+    "tip": "adaugat",
+    "id": 518008,
+    "titlu": "Drept de uzufruct viager asupra apartament Jud.Cluj, UAT Floresti, Str.Sesul de Sus Nr.6, Sc.2, Et.P.Ap.15",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033650000000031218-drept-de-uzufruct-viager-asupra-apartament-jud-cluj-uat-floresti-str-sesul-de-sus-nr-6-sc-2-et-p-ap-15"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517978,
+    "titlu": "Faneata -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600023226000000031188-faneata"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517987,
+    "titlu": "Teren agricol - extravilan",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600030288000000031197-teren-agricol-extravilan"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517723,
+    "titlu": "Teren intravilan curţi-construcţii situat in Sibiu, str. Ion Creangă, jud. Sibiu",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033148000000030933-teren-intravilan-curti-constructii-situat-in-sibiu-str-ion-creanga-jud-sibiu"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517681,
+    "titlu": "CASA DE LOCUIT",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022962000000030891-casa-de-locuit"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517750,
+    "titlu": "Teren construibil - INTRAVILAN in suprafata de 101 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033483000000030960-teren-construibil-intravilan-in-suprafata-de-101-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517754,
+    "titlu": "Teren arabil extravilan loc Solovastru, 800 mp",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033489000000030964-teren-arabil-extravilan-loc-solovastru-800-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517606,
+    "titlu": "Apartament 1camera,  S.U. 25,58 mp, situat în Oradea",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029695000000030816-apartament-1camera-s-u-25-58-mp-situat-in-oradea"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517657,
+    "titlu": "Spatiu industrial - productie-servicii",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029759000000030867-spatiu-industrial-productie-servicii"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517541,
+    "titlu": "cotă de 1/2 din teren în suprafata de 500 mp (cotă aferentă : 250 mp)",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029357000000030751-cota-de-1-2-din-teren-in-suprafata-de-500-mp-cota-aferenta-250-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517751,
+    "titlu": "Teren construibil - INTRAVILAN in suprafata de 191 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033484000000030961-teren-construibil-intravilan-in-suprafata-de-191-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517682,
+    "titlu": "Teren agricol - extravilan in suprafata de 950 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022970000000030892-teren-agricol-extravilan-in-suprafata-de-950-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517689,
+    "titlu": "Cota de 1/4 si cota de 1/12 din teren extravilan in suprafata de 1700 mp",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600014269000000030899-cota-de-1-4-si-cota-de-1-12-din-teren-extravilan-in-suprafata-de-1700-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517679,
+    "titlu": "Teren agricol - extravilan in suprafata de 2575 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600014739000000030889-teren-agricol-extravilan-in-suprafata-de-2575-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517749,
+    "titlu": "Cota de 2/5 din teren intravilan in suprafata de 539 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033482000000030959-cota-de-2-5-din-teren-intravilan-in-suprafata-de-539-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517573,
+    "titlu": "Casa si teren",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022205000000030783-casa-si-teren"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517676,
+    "titlu": "Neproductiv - in suprafata de 1000 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600014707000000030886-neproductiv-in-suprafata-de-1000-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517656,
+    "titlu": "Spatiu industrial - productie-servicii",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029758000000030866-spatiu-industrial-productie-servicii"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517761,
+    "titlu": "Apartament",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033505000000030971-apartament"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517677,
+    "titlu": "Neproductiv - in suprafata de 1000 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600014708000000030887-neproductiv-in-suprafata-de-1000-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517722,
+    "titlu": "Teren partial intravilan situat in Jina, zona Valea Frumoasei - lacul Oaşa, jud. Sibiu",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600019978000000030932-teren-partial-intravilan-situat-in-jina-zona-valea-frumoasei-lacul-oasa-jud-sibiu"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517755,
+    "titlu": "Teren extravilan inscris in CF 51101 Solovastru, 4300 mp, cu 4 constructii neevidentiate in CF",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033490000000030965-teren-extraviulan-inscris-in-cf-51101-solovastru-4300-mp-cu-4-constructii-neevidentiate-in-cf"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517752,
+    "titlu": "Faneata - in suprafata de 2566 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033485000000030962-faneata-in-suprafata-de-2566-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517545,
+    "titlu": "Teren construibil - intravilan in comuna Dragotesti",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600016716000000030755-teren-construibil-intravilan-in-comuna-dragotesti"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517678,
+    "titlu": "Teren agricol - INTRAVILAN in suprafata de 249 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600014726000000030888-teren-agricol-intravilan-in-suprafata-de-249-mp"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517674,
+    "titlu": "Casa/Vila - teren intravilan",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029790000000030884-casa-vila-teren-intravilan"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517537,
+    "titlu": "Apartament cu 2 camere in Oravita, Jud. Caras-Severin",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022894000000030747-apartament-cu-2-camere-in-oravita-jud-caras-severin"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517409,
+    "titlu": "EXTRAVILAN FÂNEAȚĂ",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600016594000000030619-extravilan-fanea-a"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517288,
+    "titlu": "Teren extravilan -arabil",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029406000000030498-teren-extravilan-arabil"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517171,
+    "titlu": "Imobil situat in extravilanul Com CHICHIS JUD COVASNA ,incris in CF nr. 25268 a loc. Băcel",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600016579000000030381-imobil-situat-in-extravilanul-com-chichis-jud-covasna-incris-in-cf-nr-25268-a-loc-bacel"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517164,
+    "titlu": "CASA DE  LOCUIT",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600013251000000030374-casa-de-locuit"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517162,
+    "titlu": "Teren intravilan  situat in  localitatea Pielesti, judetul Dolj",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600021279000000030372-teren-intravilan-situat-in-localitatea-pielesti-judetul-dolj"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517444,
+    "titlu": "Spatiu industrial - alte tipuri",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033382000000030654-spatiu-industrial-alte-tipuri"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517388,
+    "titlu": "Cota de 3/16 din apartament in vila si teren, situat in loc. Jelna, nr. 44, jud Bistrita Nasaud",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033347000000030598-cota-de-3-16-din-apartament-in-vila-si-teren-situat-in-loc-jelna-nr-44-jud-bistrita-nasaud"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517165,
+    "titlu": "Teren agricol -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600013270000000030375-teren-agricol"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517226,
+    "titlu": "Garsoniera Schela",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029340000000030436-garsoniera-schela"
+   },
+   {
+    "tip": "adaugat",
+    "id": 517172,
+    "titlu": "Casa/Vila -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600016583000000030382-casa-vila"
+   },
+   {
+    "tip": "modificat",
+    "id": 516822,
+    "titlu": "Teren agricol extravilan arabil - in suprafata de 1539 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600018348000000030032-teren-agricol-extravilan-arabil-in-suprafata-de-1539-mp",
+    "campuri": [
+     {
+      "camp": "nrOferte",
+      "vechi": 0,
+      "nou": 1
+     }
+    ]
+   },
+   {
+    "tip": "modificat",
+    "id": 516823,
+    "titlu": "Teren agricol extravilan arabil- in suprafata de 3139 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600018349000000030033-teren-agricol-extravilan-arabil-in-suprafata-de-3139-mp",
+    "campuri": [
+     {
+      "camp": "nrOferte",
+      "vechi": 1,
+      "nou": 2
+     }
+    ]
+   },
+   {
+    "tip": "modificat",
+    "id": 516560,
+    "titlu": "Teren intravilan categorie folosinta curtii constructii, destinatie de parcare",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033298000000029770-teren-intravilan-categorie-folosinta-curtii-constructii-destinatie-de-parcare",
+    "campuri": [
+     {
+      "camp": "nrOferte",
+      "vechi": 0,
+      "nou": 1
+     }
+    ]
+   },
+   {
+    "tip": "eliminat",
+    "id": 516554,
+    "titlu": "Teren agricol - in suprafata de 2600 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029974000000029764-teren-agricol-in-suprafata-de-2600-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-08-20/4839ad9b-a6cf-4c15-a1a0-314de5d3cac7_thumbnail.jpg",
+     "pret": 6283.5,
+     "subcategorie": "Terenuri",
+     "judet": "Mureș",
+     "localitate": "Reghin zona Semănătorilor",
+     "reducere": 25,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516533,
+    "titlu": "Teren agricol -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022931000000029743-teren-agricol",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-07-15/a40a6616-8821-480c-8e2b-79a5552b9f68_thumbnail.jpg",
+     "pret": 7241.0,
+     "subcategorie": "Terenuri",
+     "judet": "Buzău",
+     "localitate": "Puiesti",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516388,
+    "titlu": "Teren agricol - EXTRAVILAN in suprafata de 600 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022216000000029598-teren-agricol-extravilan-in-suprafata-de-600-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-07-15/cc5ef3a4-fc32-499f-a89b-4d4b129a890b_thumbnail.jpg",
+     "pret": 1100.0,
+     "subcategorie": "Terenuri",
+     "judet": "Giurgiu",
+     "localitate": "Fratesti",
+     "reducere": 50,
+     "nrOferte": 3,
+     "dataOraFinal": "2026-10-30T11:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516126,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033193000000029336-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/ebe05e28-2daa-4e83-87cb-e7009e7553d3_thumbnail.jpg",
+     "pret": 18150.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516122,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033189000000029332-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/c75922de-0e6c-4718-8c90-2570aebce929_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516132,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033199000000029342-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/26cd5420-7ad6-4417-856e-b31eaa74d68d_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516134,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033201000000029344-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/28075d83-9513-4f16-b1a5-38f4b567d380_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516382,
+    "titlu": "Spatiu industrial -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029757000000029592-spatiu-industrial",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-08-19/7e87e715-d67e-4424-958d-d545e81b2539_thumbnail.jpg",
+     "pret": 4149.09,
+     "subcategorie": "Hale si Depozite",
+     "judet": "Cluj",
+     "localitate": "Dej Triaj",
+     "reducere": 25,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516125,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033192000000029335-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/57409bb8-50d2-4fa1-92cf-87f35d723018_thumbnail.jpg",
+     "pret": 18150.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516129,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033196000000029339-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/2314c821-2c88-41b0-8e97-44ff5d329435_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516121,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033188000000029331-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/79a714f8-5686-4cdb-a616-f750aeac0a47_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516368,
+    "titlu": "Teren extravilan - categorie de folosinta faneata",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022491000000029578-teren-extravilan-categorie-de-folosinta-faneata",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-07-14/a03f5596-4396-4ccd-b161-172edb18cc80_thumbnail.jpg",
+     "pret": 820.0,
+     "subcategorie": "Terenuri",
+     "judet": "Mureș",
+     "localitate": "Rastolita",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516135,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033202000000029345-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/2651c774-6bbf-4332-a86c-d65a448bbdc2_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516130,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033197000000029340-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/59b72cfc-8dc3-4091-a749-17c480d6d367_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516123,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033190000000029333-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/aa66224c-e9b1-4024-ae70-e4c6f8446529_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516131,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033198000000029341-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/261bdd75-3d25-4213-88c8-dc5cd8f8115d_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516133,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033200000000029343-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/10ea9b59-f380-4d99-9282-bcbea7fa5bf8_thumbnail.jpg",
+     "pret": 13310.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516127,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033194000000029337-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/e66f7c2a-0ae2-495e-aa2a-9a4ed72fa055_thumbnail.jpg",
+     "pret": 18150.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516128,
+    "titlu": "Monument funerar",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033195000000029338-monument-funerar",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/aa19a51f-8dd1-4b98-aa80-2e3cf5ceefbe_thumbnail.jpg",
+     "pret": 18150.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516124,
+    "titlu": "ALTE BUNURI PRODUSE FINITE",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033191000000029334-alte-bunuri-produse-finite",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-24/aca1eb46-214b-4af3-b7b5-66802348c796_thumbnail.jpg",
+     "pret": 18150.0,
+     "subcategorie": "Constructii Speciale",
+     "judet": "Harghita",
+     "localitate": "M-ciuc",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516119,
+    "titlu": "Casa/Vila - LOCUINTA  SI  ANEXE",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600014635000000029329-casa-vila-locuinta-si-anexe",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-29/0efb783b-95ca-4f2a-a9d5-2d3b7f96baa3_thumbnail.jpg",
+     "pret": 6437.5,
+     "subcategorie": "Case-Vile",
+     "judet": "Arad",
+     "localitate": "Şomoşcheş",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T07:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515935,
+    "titlu": "COTA DE 1/2 DIN TEREN EXTRAVILAN ARABIL in Supraf. de 4300 MP, SITUAT IN LOC. APAHIDA, JUD. CLUJ",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600016620000000029145-cota-de-1-2-din-teren-extravilan-arabil-in-supraf-de-4300-mp-situat-in-loc-apahida-jud-cluj",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-29/0baed8b1-ee34-45c9-b6f2-46a613df86ad_thumbnail.png",
+     "pret": 23505.5,
+     "subcategorie": "Terenuri",
+     "judet": "Cluj",
+     "localitate": "Apahida",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515964,
+    "titlu": "Teren, categorei folosinta vie, Umbraresti, jud. Galati",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033116000000029174-teren-categorei-folosinta-vie-umbraresti-jud-galati",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-23/2c80b90d-57bb-45e0-bbb1-3cdae0bdc72b_thumbnail.jpg",
+     "pret": 13369.0,
+     "subcategorie": "Terenuri",
+     "judet": "Galați",
+     "localitate": "Umbraresti",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515950,
+    "titlu": "Teren construibil - INTRAVILAN",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022378000000029160-teren-construibil-intravilan",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-07-13/363270b5-7372-4458-8c66-b912a97b22df_thumbnail.jpg",
+     "pret": 5143.73,
+     "subcategorie": "Terenuri",
+     "judet": "Galați",
+     "localitate": "Toflea",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515953,
+    "titlu": "Teren agricol -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600029592000000029163-teren-agricol",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-08-19/402b91c8-7892-47f2-85c0-a2c93306ec07_thumbnail.jpg",
+     "pret": 1800.0,
+     "subcategorie": "Terenuri",
+     "judet": "Bihor",
+     "localitate": "Fegernic",
+     "reducere": 25,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515934,
+    "titlu": "Faneata -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600022020000000029144-faneata",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-07-08/90c7251f-f149-43b1-b385-7a8239d6262c_thumbnail.jpg",
+     "pret": 22663.0,
+     "subcategorie": "Terenuri",
+     "judet": "Suceava",
+     "localitate": "Cotargasi-jud. Suceava",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 516416,
+    "titlu": "apartament compus din 1 camera si dependinte",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600027089000000029626-apartament-compus-din-1-camera-si-dependinte",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-08-06/6d95ad26-b79f-4505-a913-b1fbebaa0fad.jpg",
+     "pret": 41300.0,
+     "subcategorie": "Apartamente",
+     "judet": "Maramureș",
+     "localitate": "Baia Mare",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T12:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515595,
+    "titlu": "Pasune -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600021502000000028805-pasune",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-07-06/85aa1415-3374-4cd5-b86e-975797e24ea7_thumbnail.jpg",
+     "pret": 10710.0,
+     "subcategorie": "Terenuri",
+     "judet": "Suceava",
+     "localitate": "Brosteni-jud. Suceava",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515670,
+    "titlu": "Padure - teren neimprejmuit",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600033068000000028880-padure-teren-neimprejmuit",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-22/2833623f-3c88-4c91-904d-5b288dfa5d43_thumbnail.jpg",
+     "pret": 44512.0,
+     "subcategorie": "Terenuri",
+     "judet": "Vâlcea",
+     "localitate": "Stoileşti",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 515134,
+    "titlu": "Vie - Extravilan in suprafata de 1710 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600021188000000028344-vie-extravilan-in-suprafata-de-1710-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-07-06/a2e4fd35-2caf-46d2-8da1-62320edcf9e6_thumbnail.jpg",
+     "pret": 10225.0,
+     "subcategorie": "Terenuri",
+     "judet": "Gorj",
+     "localitate": "Motru",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514912,
+    "titlu": "Teren intravilan - categorie de folosinta - drum, in cota de 180 mp din totalul de 1490 mp, loc. Chinteni, jud Cluj",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032924000000028122-teren-intravilan-categorie-de-folosinta-drum-in-cota-de-180-mp-din-totalul-de-1490-mp-loc-chinteni-jud-cluj",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-21/58ede813-0333-481d-9858-eee89645bcdf_thumbnail.jpg",
+     "pret": 63300.0,
+     "subcategorie": "Terenuri",
+     "judet": "Cluj",
+     "localitate": "Chinteni",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T16:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514748,
+    "titlu": "Construcţia C1- hală-rampă în suprafaţă constuită la sol de 3178 mp si teren aferent 3312 mp",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020878000000027958-constructia-c1-hala-rampa-in-suprafata-constuita-la-sol-de-3178-mp-si-teren-aferent-3312-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-30/7f8f605d-d7eb-4937-adaa-65d63faaea02_thumbnail.jpg",
+     "pret": 6723728.0,
+     "subcategorie": "Hale si Depozite",
+     "judet": "Prahova",
+     "localitate": "Campina",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514718,
+    "titlu": "Teren agricol -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600027339000000027928-teren-agricol",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-08-10/478fb372-f89b-4137-beef-d056a4946dd2_thumbnail.jpg",
+     "pret": 38915.25,
+     "subcategorie": "Terenuri",
+     "judet": "Galați",
+     "localitate": "Matca",
+     "reducere": 25,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 513623,
+    "titlu": "Teren intravilan neinprejmuit, categoria de folosinta padure - in suprafata masurata de 3978 MP, CF 79226 UAT Moroeni, jud. Dambovita",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032692000000026833-teren-intravilan-neinprejmuit-categoria-de-folosinta-padure-in-suprafata-masurata-de-3978-mp-cf-79226-uat-moroeni-jud-dambovita",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-16/46acfe04-724f-458f-b2b6-1a3123da77fc_thumbnail.jpg",
+     "pret": 828200.0,
+     "subcategorie": "Terenuri",
+     "judet": "Dâmbovița",
+     "localitate": "Dobresti",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514724,
+    "titlu": "Teren construibil -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020817000000027934-teren-construibil",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-30/d53aaabc-6f53-4b60-a482-a1398a54732b_thumbnail.jpg",
+     "pret": 620887.54,
+     "subcategorie": "Terenuri",
+     "judet": "Timiș",
+     "localitate": "Moşniţa Nouă",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514750,
+    "titlu": "Teren construibil - in suprafata de 4000 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020881000000027960-teren-construibil-in-suprafata-de-4000-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-30/7e37c598-9c69-474e-b6a8-cfb76a8305a3_thumbnail.jpg",
+     "pret": 592816.51,
+     "subcategorie": "Terenuri",
+     "judet": "Ilfov",
+     "localitate": "Magurele",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514720,
+    "titlu": "Pasune - in suprafata de 10000 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015965000000027930-pasune-in-suprafata-de-10000-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-22/2b459d60-b4c3-4535-8e6d-e0330e9eaf93_thumbnail.jpg",
+     "pret": 26125.0,
+     "subcategorie": "Terenuri",
+     "judet": "Argeș",
+     "localitate": "Leordeni",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514321,
+    "titlu": "Casa/Vila -  cota de 2/6 din casa de locuit si teren aferent",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032897000000027531-casa-vila-cota-de-2-6-din-casa-de-locuit-si-teren-aferent",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/58070e04-fda5-45fd-9132-bced75d8112b_thumbnail.jpg",
+     "pret": 229100.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Arad",
+     "localitate": "Arad",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514067,
+    "titlu": "Clădire şi teren aferent situată în Constanţa",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032859000000027277-cladire-si-teren-aferent-situata-in-constanta",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/bdaeeaf7-313d-4411-877c-98164ffe5429_thumbnail.jpg",
+     "pret": 1285956.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Constanța",
+     "localitate": "judeţul Constanţa",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514723,
+    "titlu": "Apartament",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020761000000027933-apartament",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-30/78e7f9dd-03a6-477b-8c4f-c51928ea0a9d.jpg",
+     "pret": 254500.0,
+     "subcategorie": "Apartamente",
+     "judet": "Dolj",
+     "localitate": "Craiova",
+     "reducere": 50,
+     "nrOferte": 1,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514719,
+    "titlu": "Apartament - bloc apartamente",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020178000000027929-apartament-bloc-apartamente",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-24/1c569cdd-c1cb-4984-bf36-a5574062127b_thumbnail.jpg",
+     "pret": 201953.5,
+     "subcategorie": "Apartamente",
+     "judet": "București",
+     "localitate": "Calea Rahovei",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514333,
+    "titlu": "Teren intravilan si constructii.",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032910000000027543-teren-intravilan-si-constructii",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/a0f60eed-9146-48a3-9527-dfb815a6da4d_thumbnail.jpg",
+     "pret": 54135.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Prahova",
+     "localitate": "Uat Sirna",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514317,
+    "titlu": "Ap. nr 2, parter, 3 camere, bucatarie, baie, hol, SU 77.60 mp cu 14.1% pci si 116 / 822 mp teren",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600005539000000027527-ap-nr-2-parter-3-camere-bucatarie-baie-hol-su-77-60-mp-cu-14-1-pci-si-116-822-mp-teren",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-09/9175e4e7-2c8d-4218-bb4e-dd6113187e94_thumbnail.jpg",
+     "pret": 51800.0,
+     "subcategorie": "Apartamente",
+     "judet": "Timiș",
+     "localitate": "Ciacova",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T08:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514320,
+    "titlu": "Apartament nr 1 P 3 camere baie hol SU 78.20 mp cu 14.2% pci si 117/924 mp teren",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600005540000000027530-apartament-nr-1-p-3-camere-baie-hol-su-78-20-mp-cu-14-2-pci-si-117-924-mp-teren",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-16/017b1a4c-64dc-4e74-8bfb-c6c7cc5c8be7.png",
+     "pret": 26100.0,
+     "subcategorie": "Apartamente",
+     "judet": "Timiș",
+     "localitate": "Ciacova",
+     "reducere": 75,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-31T08:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514712,
+    "titlu": "Apartament 2 camere, Petrosani",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020164000000027922-apartament-2-camere-petrosani",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-24/514a831b-83a7-4e9b-b459-0c7567e96655_thumbnail.jpg",
+     "pret": 97954.15,
+     "subcategorie": "Apartamente",
+     "judet": "Hunedoara",
+     "localitate": "Petrosani str.Pacii",
+     "reducere": 50,
+     "nrOferte": 1,
+     "dataOraFinal": "2026-10-31T08:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514548,
+    "titlu": "Spatiu industrial - depozitare",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015941000000027758-spatiu-industrial-depozitare",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-19/75aa519c-c0d2-4aee-92cb-7b523d9fb985_thumbnail.jpg",
+     "pret": 85700.0,
+     "subcategorie": "Hale si Depozite",
+     "judet": "Vâlcea",
+     "localitate": "Oveselu",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514543,
+    "titlu": "Spatiu industrial - Hala industriala- centr termica Bucura II corp 2",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012847000000027753-spatiu-industrial-hala-industriala-centr-termica-bucura-ii-corp-2",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-08/ea3e2be9-603b-4b37-9b87-77f8dc2db1fd.jpg",
+     "pret": 1300755.5,
+     "subcategorie": "Hale si Depozite",
+     "judet": "Hunedoara",
+     "localitate": "Uricani",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514542,
+    "titlu": "Teren construibil - in suprafata de 3155 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012845000000027752-teren-construibil-in-suprafata-de-3155-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-08/2f76be97-f8bb-4379-9e69-2fe5af1c5a0a_thumbnail.jpg",
+     "pret": 258698.0,
+     "subcategorie": "Terenuri",
+     "judet": "Olt",
+     "localitate": "Bistrita Noua",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514563,
+    "titlu": "Faneata -Zărneşti",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600020538000000027773-faneata-zarnesti",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-06-29/83ea1e7b-45e9-4324-a435-d14c485d248d_thumbnail.jpg",
+     "pret": 48205.0,
+     "subcategorie": "Terenuri",
+     "judet": "Brașov",
+     "localitate": "Zărneşti",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514545,
+    "titlu": "Ansamblu de bunuri",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015923000000027755-ansamblu-de-bunuri",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-19/705915cb-3155-460b-a41b-7e491745074d_thumbnail.jpg",
+     "pret": 925537.5,
+     "subcategorie": "Case-Vile",
+     "judet": "Timiș",
+     "localitate": "Parta",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514544,
+    "titlu": "Casa si teren",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012881000000027754-casa-si-teren",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-08/a0793171-2342-421e-95b3-bf02e8748841.jpg",
+     "pret": 44914.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Gorj",
+     "localitate": "Vidin",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514549,
+    "titlu": "Teren construibil - INTRAVILAN in suprafata de 2000 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015946000000027759-teren-construibil-intravilan-in-suprafata-de-2000-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-19/cdfb96d8-a2c7-4ba9-87fe-38d86a13b3bd_thumbnail.jpg",
+     "pret": 49322.02,
+     "subcategorie": "Terenuri",
+     "judet": "Tulcea",
+     "localitate": "Vulturu",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514539,
+    "titlu": "APARTAMENT 2 CAMERE SUPRAFATA  49,5 M.P VASCAU,BIHOR",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012671000000027749-apartament-2-camere-suprafata-49-5-m-p-vascau-bihor",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-07/20ebd2aa-854d-4e8b-9cc3-ecc5ca199af6.jpg",
+     "pret": 63500.0,
+     "subcategorie": "Apartamente",
+     "judet": "Bihor",
+     "localitate": "Vascau",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514388,
+    "titlu": "Casa/Vila - Ansamblu",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012705000000027598-casa-vila-ansamblu",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-07/8f706312-2155-4379-961e-718d0beb1f8c_thumbnail.jpg",
+     "pret": 40717.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Galați",
+     "localitate": "Talpigi",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-30T07:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514385,
+    "titlu": "PARCARE -Otopeni, Ilfov, Str. Putna nr.12",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032921000000027595-alte-bunuri",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/7f051843-d21d-48bc-9127-6605963eaac3_thumbnail.jpg",
+     "pret": 60625.84,
+     "subcategorie": "Terenuri",
+     "judet": "Ilfov",
+     "localitate": "Otopeni",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514322,
+    "titlu": "Apartament -",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032898000000027532-apartament",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/6e60e114-42c2-4592-90b3-94a1e14569ed_thumbnail.jpg",
+     "pret": 432536.0,
+     "subcategorie": "Apartamente",
+     "judet": "București",
+     "localitate": "Sector 1",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514101,
+    "titlu": "Casa",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015473000000027311-casa",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-14/d6a2f3b4-3e99-425c-91ee-a4a4357babbe_thumbnail.jpg",
+     "pret": 297759.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Ilfov",
+     "localitate": "Posta",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514102,
+    "titlu": "Teren extravilan arabil in suprafata de 7630 mp, Jud Cluj, UAT Palatca",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012624000000027312-teren-extravilan-arabil-in-suprafata-de-7630-mp-jud-cluj-uat-palatca",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-07/72f3c9f0-4919-4a8d-b528-d6da37703117_thumbnail.jpg",
+     "pret": 40100.0,
+     "subcategorie": "Terenuri",
+     "judet": "Cluj",
+     "localitate": "Uat Palatca",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514262,
+    "titlu": "Teren construibil - curti constructii",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032891000000027472-teren-construibil-curti-constructii",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/f031cd5c-e436-470e-8634-12bc1e98af31_thumbnail.jpg",
+     "pret": 794970.0,
+     "subcategorie": "Terenuri",
+     "judet": "Călărași",
+     "localitate": "Fundulea",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514105,
+    "titlu": "Casa si teren",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012675000000027315-casa-si-teren",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-07/f4831ab5-e534-49a3-9cd6-838e7e8f06dc_thumbnail.jpg",
+     "pret": 198686.5,
+     "subcategorie": "Case-Vile",
+     "judet": "Dolj",
+     "localitate": "Bailesti",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514107,
+    "titlu": "Teren agricol - in suprafata de 480 MP",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012707000000027317-teren-agricol-in-suprafata-de-480-mp",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-07/736d08ce-1498-4a78-9e9e-5d1956a145d3_thumbnail.jpg",
+     "pret": 27150.0,
+     "subcategorie": "Terenuri",
+     "judet": "Olt",
+     "localitate": "Corabia",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514384,
+    "titlu": "PARCARE -Otopeni, Ilfov, Str. Putna nr.12",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032920000000027594-alte-bunuri",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/1db64cd5-2a68-417c-a1f4-af33516e4b41_thumbnail.jpg",
+     "pret": 56382.37,
+     "subcategorie": "Terenuri",
+     "judet": "Ilfov",
+     "localitate": "Otopeni",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514103,
+    "titlu": "Teren intravilan  arabil, in suprafata de 1367 mp., in loc. Rascruci nr. FN, Com Bontida, jud. Cluj",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012630000000027313-teren-intravilan-arabil-in-suprafata-de-1367-mp-in-loc-rascruci-nr-fn-com-bontida-jud-cluj",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-07/912c7e88-6886-4d08-aabe-94829a20fab9_thumbnail.jpg",
+     "pret": 116950.0,
+     "subcategorie": "Terenuri",
+     "judet": "Cluj",
+     "localitate": "Rascruci",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514112,
+    "titlu": "Teren extravilan in suprafata de 5800 MP, UAT Capusu Mare, Jud. Cluj",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015902000000027322-teren-extravilan-in-suprafata-de-5800-mp-uat-capusu-mare-jud-cluj",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-18/81d72aea-08ab-4c7f-9ab9-749be36a38ab_thumbnail.jpg",
+     "pret": 41800.0,
+     "subcategorie": "Terenuri",
+     "judet": "Cluj",
+     "localitate": "Uat Capusu Mare",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514104,
+    "titlu": "Casa si teren în Craiova",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600012670000000027314-casa-si-teren-in-craiova",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-04-07/b29ae450-aa42-40ea-9ebc-5d8ccaf8f453.jpg",
+     "pret": 482081.5,
+     "subcategorie": "Case-Vile",
+     "judet": "Dolj",
+     "localitate": "Craiova",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514328,
+    "titlu": "PARCARE SUBTERANĂ",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032903000000027538-parcare-subterana",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/3afc4acb-d1da-436a-8744-44967cf78f90_thumbnail.jpg",
+     "pret": 50499.76,
+     "subcategorie": "Garaje",
+     "judet": "Timiș",
+     "localitate": "Uat Timisoara",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514111,
+    "titlu": "Casa si teren in com. Saulesti, jud. Gorj",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600015896000000027321-casa-si-teren-in-com-saulesti-jud-gorj",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-05-18/c0aa5c47-64a5-4233-939d-92530f42a830.jpg",
+     "pret": 54386.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Gorj",
+     "localitate": "Saulesti",
+     "reducere": 50,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   },
+   {
+    "tip": "eliminat",
+    "id": 514380,
+    "titlu": "Casa si teren",
+    "url": "https://elicitatii.anaf.ro/licitatii/produs/12600032917000000027590-casa-si-teren",
+    "snap": {
+     "imagine": "https://elicitatii.anaf.ro/cdn/public/bunuri/bun/2026-09-18/5c3e58e3-0ef8-419b-aefc-b608575f0c1b_thumbnail.jpg",
+     "pret": 64500.0,
+     "subcategorie": "Case-Vile",
+     "judet": "Dolj",
+     "localitate": "Catane",
+     "reducere": null,
+     "nrOferte": 0,
+     "dataOraFinal": "2026-10-29T09:00:00+02:00"
+    }
+   }
+  ]
+ },
+ {
   "data": "2026-10-28T18:13:00+0200",
   "durata": 911,
   "cereriAnaf": 140,
