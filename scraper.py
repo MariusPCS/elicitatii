@@ -8,7 +8,8 @@ Strategy (kept deliberately light on the remote site):
   * every request to ANAF is spaced by a random 3-6 s pause, uses a normal
     browser User-Agent, and stops on HTTP 429/403 instead of retrying hard.
   * geocoding (OpenStreetMap Nominatim) is cached forever and limited to
-    1 request / 1.5 s as their usage policy requires.
+    1 request / 1.5 s as their usage policy requires. It resolves the județ
+    first and only accepts places inside it.
 """
 import json
 import random
@@ -53,6 +54,39 @@ def norm(s):
 
 COUNTY_BY_NAME = {norm(v[0]): k for k, v in COUNTIES.items()}
 COUNTY_BY_NAME.update({"municipiul bucuresti": "40", "bucuresti": "40"})
+
+# county id -> ISO 3166-2 code, as Nominatim reports it in address["ISO3166-2-lvl4"] (DGAMC is not a county)
+COUNTY_ISO = {
+    "1": "RO-AB", "2": "RO-AR", "3": "RO-AG", "4": "RO-BC", "5": "RO-BH", "6": "RO-BN", "7": "RO-BT", "8": "RO-BV",
+    "9": "RO-BR", "10": "RO-BZ", "11": "RO-CS", "12": "RO-CJ", "13": "RO-CT", "14": "RO-CV", "51": "RO-CL",
+    "16": "RO-DJ", "15": "RO-DB", "17": "RO-GL", "52": "RO-GR", "18": "RO-GJ", "19": "RO-HR", "20": "RO-HD",
+    "21": "RO-IL", "22": "RO-IS", "23": "RO-IF", "24": "RO-MM", "25": "RO-MH", "40": "RO-B", "26": "RO-MS",
+    "27": "RO-NT", "28": "RO-OT", "29": "RO-PH", "30": "RO-SM", "32": "RO-SB", "33": "RO-SV", "31": "RO-SJ",
+    "34": "RO-TR", "35": "RO-TM", "36": "RO-TL", "37": "RO-VS", "39": "RO-VN", "38": "RO-VL",
+}
+
+
+def county_id(name):
+    """'PRAHOVA', 'Județul Prahova', 'Municipiul București' -> county id, or None."""
+    return COUNTY_BY_NAME.get(re.sub(r"^jud(?:etul|et|\.)?\s*", "", norm(name)).strip(" .,"))
+
+
+def address_county(address):
+    """The județ an address names itself ('…, jud. Arad', '…, Galati', 'Bucuresti, Sector 1'), or None.
+
+    The auction page's "Județ" is the tax office's county, which is not always where the property is."""
+    text = norm(address)
+    if not text:
+        return None
+    m = re.search(r"\bjud(?:etul|et|\.)?\s*\.?\s*([a-z][a-z \-]+?)\s*(?:[,.;]|$)", text)
+    if m and county_id(m.group(1)):
+        return county_id(m.group(1))
+    parts = [p.strip(" .") for p in text.split(",") if p.strip(" .")]
+    if parts and county_id(parts[-1]):
+        return county_id(parts[-1])
+    if re.search(r"\bsector(?:ul)?\s*\d", text) or (parts and county_id(parts[0]) == "40"):
+        return "40"
+    return None
 
 
 class Blocked(Exception):
@@ -275,49 +309,100 @@ def guess_locality(text):
 
 
 class Geocoder:
+    """Nominatim lookups, always in this order: the județ first, then the place inside it.
+
+    Every result must carry the județ's ISO code (address["ISO3166-2-lvl4"]), so a pin can
+    never land in another county – e.g. "str. Venus, Ploiești" can't resolve to Strada Venus in București.
+    """
+    V = "v2|"  # cache key prefix; bump to re-geocode everything once
+
     def __init__(self, log=print):
         self.log = log
         self.path = DATA / "geocache.json"
-        self.cache = json.loads(self.path.read_text()) if self.path.exists() else {}
+        cache = json.loads(self.path.read_text()) if self.path.exists() else {}
+        self.cache = {k: v for k, v in cache.items() if k.startswith(self.V)}
         self.last = 0.0
 
     def save(self):
         self.path.write_text(json.dumps(self.cache, ensure_ascii=False, indent=1))
 
     STREET_TYPES = {"road", "house", "building", "residential", "street", "house_number", "highway",
-                    "industrial", "commercial", "retail", "construction", "farmyard"}
+                    "industrial", "commercial", "retail", "construction", "farmyard", "primary", "secondary",
+                    "tertiary", "unclassified", "living_street", "pedestrian", "service", "trunk", "footway", "place"}
+    PLACE_KEYS = ("city", "town", "village", "municipality", "suburb", "city_district", "hamlet", "quarter",
+                  "neighbourhood", "residential", "locality", "isolated_dwelling")
 
-    def search(self, query, county_id):
-        """Free-text Nominatim search. Returns [lat, lon, addresstype] or None (cached)."""
-        _, clat, clon = COUNTIES[county_id]
-        key = f"q:{norm(query)}"
-        if key in self.cache:
-            return self.cache[key]
+    def _query(self, params):
+        """One rate-limited Nominatim call. Returns the result list, or None on a network error."""
         wait = self.last + 1.5 - time.time()
         if wait > 0:
             time.sleep(wait)
-        q = urllib.parse.urlencode({"q": query, "format": "jsonv2", "limit": 1, "countrycodes": "ro"})
+        q = urllib.parse.urlencode({**params, "format": "jsonv2", "limit": 5, "addressdetails": 1,
+                                    "countrycodes": "ro"})
         req = urllib.request.Request("https://nominatim.openstreetmap.org/search?" + q,
                                      headers={"User-Agent": "elicitatii-local-viewer/1.0 (personal use)"})
-        res = None
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
-                arr = json.loads(r.read())
-            if arr:
-                lat, lon = float(arr[0]["lat"]), float(arr[0]["lon"])
-                # accept only if reasonably close to the county (~1.3 degrees)
-                if abs(lat - clat) < 1.3 and abs(lon - clon) < 1.6:
-                    res = [lat, lon, arr[0].get("addresstype") or arr[0].get("type") or ""]
+                return json.loads(r.read())
         except Exception as e:  # network issue: don't cache, try next time
-            self.log(f"geocoding failed for {query}: {e}")
-            self.last = time.time()
+            self.log(f"geocoding failed for {params}: {e}")
             return None
-        self.last = time.time()
+        finally:
+            self.last = time.time()
+
+    def area(self, county_id):
+        """Step 1 – the județ itself: {"bbox": [south, north, west, east], "center": [lat, lon]} or None."""
+        iso = COUNTY_ISO.get(county_id)
+        if not iso:
+            return None
+        key = f"{self.V}area:{county_id}"
+        if key not in self.cache:
+            name = COUNTIES[county_id][0]
+            arr = self._query({"city": name, "country": "Romania"} if iso == "RO-B"
+                              else {"county": name, "country": "Romania"})
+            if arr is None:
+                return None
+            hit = next((x for x in arr if x.get("address", {}).get("ISO3166-2-lvl4") == iso), None)
+            self.cache[key] = hit and {"bbox": [float(v) for v in hit["boundingbox"]],
+                                       "center": [float(hit["lat"]), float(hit["lon"])]}
+        return self.cache[key]
+
+    def center(self, county_id):
+        a = self.area(county_id)
+        return a["center"] if a else list(COUNTIES[county_id][1:3])
+
+    def _in_place(self, hit, places):
+        names = [norm(hit.get("name"))] + [norm(hit["address"].get(k)) for k in self.PLACE_KEYS]
+        want = [norm(p) for p in places]
+        return any(n and w and (n == w or n.startswith(w + " ") or w.startswith(n + " ") or n.endswith(" " + w))
+                   for n in names for w in want)
+
+    def search(self, county_id, params, places=()):
+        """Step 2 – a place inside the județ. Returns [lat, lon, addresstype] or None (cached)."""
+        key = self.V + county_id + "|" + norm(json.dumps(params, sort_keys=True, ensure_ascii=False))
+        if key in self.cache:
+            return self.cache[key]
+        iso, area = COUNTY_ISO.get(county_id), self.area(county_id)
+        if area:
+            s, n, w, e = area["bbox"]
+            params = {**params, "viewbox": f"{w},{n},{e},{s}", "bounded": 1}
+        arr = self._query(params)
+        if arr is None:
+            return None
+        res = None
+        for x in arr:
+            # Step 3 – verify: inside the județ, and in the locality that was asked for
+            if iso and x.get("address", {}).get("ISO3166-2-lvl4") != iso:
+                continue
+            if places and not self._in_place(x, places):
+                continue
+            res = [float(x["lat"]), float(x["lon"]), x.get("addresstype") or x.get("type") or ""]
+            break
         self.cache[key] = res
         return res
 
     def locate(self, locality, county_id):
-        r = self.search(f"{locality}, {COUNTIES[county_id][0]}, Romania", county_id)
+        r = self.search(county_id, {"q": f"{locality}, {COUNTIES[county_id][0]}"}, [locality])
         return r[:2] if r else None
 
     def locate_address(self, address, county_id):
@@ -325,14 +410,36 @@ class Geocoder:
         county = COUNTIES[county_id][0]
         street, places = parse_address(address, county)
         if street and places:
-            r = self.search(f"{street}, {places[0]}, {county}, Romania", county_id)
-            if r and r[2] in self.STREET_TYPES:
-                return r[:2], "adresa", f"{street}, {places[0]}"
+            where = {"city": places[0], "country": "Romania"}
+            if county_id != "40":
+                where["county"] = county
+            for s in street_variants(street):
+                r = self.search(county_id, {"street": s, **where}, places)
+                if r and r[2] in self.STREET_TYPES:
+                    return r[:2], "adresa", f"{street}, {places[0]}"
         for p in places:
-            r = self.search(f"{p}, {county}, Romania", county_id)
+            r = self.search(county_id, {"q": f"{p}, {county}"}, [p])
             if r:
                 return r[:2], "localitate", p
         return None, None, None
+
+
+def street_variants(street):
+    """'Strada T. Vladimirescu 24/78' -> ['24/78 Strada T. Vladimirescu', '24 Strada …', 'Strada …', 'Strada Vladimirescu']"""
+    name, _, num = street.rpartition(" ")
+    if not (name and re.match(r"^\d", num)):
+        name, num = street, ""
+    out = []
+    if num:
+        out.append(f"{num} {name}")
+        first = re.match(r"\d+", num).group()
+        if first != num:
+            out.append(f"{first} {name}")
+    out.append(name)
+    bare = re.sub(r"\b[A-Za-zĂÂÎȘŞȚŢăâîșşțţ]{1,2}\.\s*", "", name).strip()  # drop initials: "T. Vladimirescu"
+    if bare != name and len(bare.split()) > 1:
+        out.append(bare)
+    return list(dict.fromkeys(out))
 
 
 # ---------------------------------------------------------------- addresses
@@ -370,6 +477,9 @@ def parse_address(address, county=""):
         if _STREET.match(raw):
             kind = _STREET_NAME.get(norm(_STREET.match(raw).group(0)).strip(" ."), "Strada")
             name = _STREET.sub("", raw)
+            if _STREET.match(name):  # "str. Aleea Nuci" -> "Aleea Nuci"
+                kind = _STREET_NAME.get(norm(_STREET.match(name).group(0)).strip(" ."), kind)
+                name = _STREET.sub("", name)
             m = re.search(r"\bnr\.?\s*([\w/-]+)", name, re.I)
             name = re.sub(r"\bnr\.?.*$", "", name, flags=re.I).strip(" ,.")
             if name and not name.isdigit():
@@ -389,8 +499,12 @@ def parse_address(address, county=""):
             continue
         elif len(raw) > 2:
             villages.append(_title(raw))  # bare name, usually the village/locality
-    places = [p for p in villages + admins if p]
+    places = [_ABBR.sub(lambda m: _ABBR_FULL[norm(m.group(1))], p) for p in villages + admins if p]
     return street, list(dict.fromkeys(places))
+
+
+_ABBR = re.compile(r"^(Tg|Rm|Sf|Cp)\b\.?\s*", re.I)
+_ABBR_FULL = {"tg": "Târgu ", "rm": "Râmnicu ", "sf": "Sfântu ", "cp": "Câmpulung "}
 
 
 # ---------------------------------------------------------------- detail page
@@ -464,6 +578,7 @@ def save_json(name, obj):
 
 
 TRACKED = ["titlu", "pret", "stare", "dataOraStart", "dataOraFinal", "reducere", "descriere", "subcategorie", "nrOferte"]
+SNAP = ["imagine", "pret", "subcategorie", "judet", "localitate", "reducere", "nrOferte", "dataOraFinal"]  # kept with each change so removed auctions still show details
 RECHECK_PER_RUN = 20      # detail pages re-read per refresh to keep bid counts current
 RECHECK_AFTER_H = 12      # …only when the last read is older than this
 
@@ -482,7 +597,8 @@ def diff(old, new):
                                 "url": a.get("url"), "campuri": fields})
     for i, a in old_by.items():
         if i not in new_by:
-            changes.append({"tip": "eliminat", "id": i, "titlu": a.get("titlu"), "url": a.get("url")})
+            changes.append({"tip": "eliminat", "id": i, "titlu": a.get("titlu"), "url": a.get("url"),
+                            "snap": {k: a.get(k) for k in SNAP}})
     return changes
 
 
@@ -554,10 +670,6 @@ def refresh(log=print, progress=lambda **k: None):
                 d = parse_detail(f.get(urllib.parse.urlparse(it["url"]).path))
                 details[it["id"]] = d or {}
                 details[it["id"]]["citit"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
-                if d and d.get("judetNume") and it["id"] not in county_cache:
-                    cid = COUNTY_BY_NAME.get(norm(d["judetNume"]))
-                    if cid:
-                        county_cache[it["id"]] = cid
                 if n % 10 == 0:
                     save_json("details.json", details)
         except Blocked as e:
@@ -565,8 +677,20 @@ def refresh(log=print, progress=lambda **k: None):
         save_json("details.json", details)
         save_json("counties.json", county_cache)
 
-    # 4) geolocation: Loc deținere address first, then the locality in the description, then county centre
+    # county = the județ named in the property address, else the page's "Județ", else the listing filter's
+    for it in items:
+        d = details.get(it["id"]) or {}
+        cid = address_county(d.get("adresa")) or address_county(d.get("adresaIdentificare")) or county_id(d.get("judetNume"))
+        if cid and county_cache.get(it["id"]) != cid:
+            if it["id"] in county_cache:
+                log(f"#{it['id']}: county {COUNTIES[county_cache[it['id']]][0]} -> {COUNTIES[cid][0]}")
+            county_cache[it["id"]] = cid
+    save_json("counties.json", county_cache)
+
+    # 4) geolocation, always inside the județ: Loc deținere address first, then the locality in the
+    #    description, then the județ centre. data/pins.json ({id: [lat, lon]}) overrides by hand.
     geo = Geocoder(log=log)
+    pins = load_json("pins.json", {})
     for n, it in enumerate(items, 1):
         d = details.get(it["id"]) or {}
         it.update({k: v for k, v in d.items() if k != "judetNume"})
@@ -575,7 +699,9 @@ def refresh(log=print, progress=lambda **k: None):
         it["judet"] = COUNTIES[cid][0] if cid else None
         progress(etapa="geocodare", curent=n, total=len(items))
         pos, precizie, label = None, None, None
-        if cid:
+        if str(it["id"]) in pins:
+            pos, precizie = pins[str(it["id"])][:2], "adresa"
+        elif cid:
             for addr in (d.get("adresa"), d.get("adresaIdentificare")):
                 if addr:
                     pos, precizie, label = geo.locate_address(addr, cid)
@@ -587,7 +713,7 @@ def refresh(log=print, progress=lambda **k: None):
             pos = geo.locate(loc, cid)
             precizie = "localitate" if pos else None
         if not pos and cid:
-            _, lat, lon = COUNTIES[cid]
+            lat, lon = geo.center(cid)
             rnd = random.Random(it["id"])  # stable jitter so markers don't stack
             pos = [lat + rnd.uniform(-0.12, 0.12), lon + rnd.uniform(-0.18, 0.18)]
             precizie = "judet"

@@ -288,6 +288,13 @@ td.thumb img { width: 56px; height: 40px; object-fit: cover; border-radius: 6px;
 .chg a:hover { color: var(--accent); }
 .chg .f { font-size: .8rem; color: var(--muted); display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 2px 10px; }
 .chg .f del { color: var(--del); } .chg .f ins { color: var(--ok); text-decoration: none; }
+.chg.rich { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 4px 12px; align-items: start; }
+.chg .main { display: grid; gap: 4px; min-width: 0; }
+.chg .thumb { width: 64px; height: 48px; object-fit: cover; border-radius: 6px; background: var(--surface-2); display: block; }
+.chg span.thumb { opacity: .35; }
+.chg .ln { font-size: .8rem; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+.chg .ln b { color: var(--ink); font-weight: 600; }
+@media (max-width: 560px) { .chg.rich { grid-template-columns: 48px minmax(0, 1fr); } .chg .thumb { width: 48px; height: 36px; } .chg.rich > .iconbtn { display: none; } }
 .kind { font-size: .66rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 4px; padding: 1px 6px; margin-right: 8px; }
 .kind.adaugat { background: var(--ok-soft); color: var(--ok); }
 .kind.modificat { background: var(--warn-soft); color: var(--warn); }
@@ -757,14 +764,40 @@ function fmtVal(f, v) {
   if (f === "subcategorie") return typeLabel(v);
   const s = String(v); return s.length > 160 ? s.slice(0, 160) + "…" : s;
 }
+/* live auction if still listed, else the snapshot saved with the change (removed ones) */
+function logItem(c, byId) {
+  const a = byId.get(c.id);
+  if (a) return { ...a, live: true };
+  const s = c.snap; if (!s) return null;
+  return { ...s, type: typeLabel(s.subcategorie), place: [s.localitate, s.judet].filter(Boolean).join(", "),
+    endsTs: s.dataOraFinal ? new Date(s.dataOraFinal).getTime() : Infinity };
+}
+function logDetails(a) {
+  if (!a) return "";
+  const e = endsIn(a.endsTs);
+  const bits = [esc(a.type), esc(a.place || ""), a.area ? `${nf0.format(a.area)} m²` : "", a.pret ? `<b>${money(a.pret)}</b>` : ""].filter(Boolean).join(" · ");
+  return `<div class="ln">${bits}
+    ${a.reducere ? `<span class="pill cut">−${a.reducere}%</span>` : ""}${a.nrOferte > 0 ? `<span class="pill bids">${bidsTxt(a)}</span>` : ""}
+    ${a.endsTs !== Infinity ? `<span class="pill ${e.soon ? "soon" : "time"}">${e.txt}</span>` : ""}</div>`;
+}
 function renderLog(live) {
+  const byId = new Map(ITEMS.map(a => [a.id, a]));
   const runs = LOG.map((r, i) => {
     const facts = r.primaRulare ? `<span>First download · ${r.total} auctions</span>`
       : `<span class="pill new">+${r.adaugate} new</span><span class="pill chg">${r.modificate} changed</span><span class="pill cut">−${r.eliminate} removed</span>`;
-    const ch = (r.schimbari || []).map(c => `<div class="chg">
-        <div><span class="kind ${c.tip}">${KIND[c.tip] || c.tip}</span><a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.titlu || "#" + c.id)}</a></div>
-        ${(c.campuri || []).map(f => `<div class="f"><span>${esc(FIELD[f.camp] || f.camp)}</span><span><del>${esc(fmtVal(f.camp, f.vechi))}</del> → <ins>${esc(fmtVal(f.camp, f.nou))}</ins></span></div>`).join("")}
-      </div>`).join("");
+    const ch = (r.schimbari || []).map(c => {
+      const a = logItem(c, byId);
+      const thumb = !a ? "" : a.imagine ? `<img class="thumb" src="${esc(a.imagine)}" alt="" loading="lazy">`
+        : `<span class="thumb" style="background:var(${catColor[a.subcategorie] || "--c8"})"></span>`;
+      return `<div class="chg${a ? " rich" : ""}">${thumb}
+        <div class="main">
+          <div><span class="kind ${c.tip}">${KIND[c.tip] || c.tip}</span><a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.titlu || "#" + c.id)}</a></div>
+          ${logDetails(a)}
+          ${(c.campuri || []).map(f => `<div class="f"><span>${esc(FIELD[f.camp] || f.camp)}</span><span><del>${esc(fmtVal(f.camp, f.vechi))}</del> → <ins>${esc(fmtVal(f.camp, f.nou))}</ins></span></div>`).join("")}
+        </div>
+        ${a?.live && a.lat != null ? `<button class="iconbtn" type="button" data-map="${a.id}" title="Show on map" aria-label="Show on map">${ICON.map}</button>` : ""}
+      </div>`;
+    }).join("");
     return `<details class="run" ${i === 0 && r.schimbari?.length ? "open" : ""}>
       <summary><span class="when">${dtLong(r.data)}</span><span class="facts">${facts}<span>${r.total} total · ${r.cereriAnaf} ANAF requests · ${r.durata}s</span></span></summary>
       ${ch || `<div class="chg" style="color:var(--muted)">${r.primaRulare ? "Baseline saved. Changes will appear from the next refresh." : "No changes since the previous refresh."}</div>`}
