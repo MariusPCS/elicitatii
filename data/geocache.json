@@ -1689,5 +1689,49 @@
   45.4883333,
   21.8494444,
   "municipality"
+ ],
+ "v2|8|{\"q\": \"ungra, brasov\"}": [
+  45.981679,
+  25.2622273,
+  "municipality"
+ ],
+ "v2|12|{\"city\": \"dej\", \"country\": \"romania\", \"county\": \"cluj\", \"street\": \"63 strada bistritei\"}": [
+  47.1581689,
+  23.8863903,
+  "trunk"
+ ],
+ "v2|35|{\"q\": \"sandra, timis\"}": [
+  45.9257859,
+  20.8938998,
+  "municipality"
+ ],
+ "v2|39|{\"q\": \"sihlea, vrancea\"}": [
+  45.478117,
+  27.1574573,
+  "municipality"
+ ],
+ "v2|12|{\"q\": \"razbuneni, cluj\"}": [
+  47.1467689,
+  23.6988996,
+  "village"
+ ],
+ "v2|24|{\"city\": \"baia mare\", \"country\": \"romania\", \"county\": \"maramures\", \"street\": \"13 strada frumusaua\"}": null,
+ "v2|24|{\"city\": \"baia mare\", \"country\": \"romania\", \"county\": \"maramures\", \"street\": \"strada frumusaua\"}": null,
+ "v2|38|{\"q\": \"botorani, valcea\"}": [
+  44.7455307,
+  24.0396297,
+  "village"
+ ],
+ "v2|26|{\"q\": \"ibanesti, mures\"}": [
+  46.7705028,
+  24.9299099,
+  "municipality"
+ ],
+ "v2|35|{\"q\": \"uat ghiroda, timis\"}": null,
+ "v2|35|{\"q\": \"judet timis, timis\"}": null,
+ "v2|35|{\"q\": \"ghiroda, timis\"}": [
+  45.7681865,
+  21.3016829,
+  "municipality"
  ]
 }

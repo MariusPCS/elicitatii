@@ -6600,13 +6600,13 @@
   "nrLicitatie": 2,
   "sechestrat": true,
   "permiteVizionare": false,
-  "nrOferte": 0,
+  "nrOferte": 1,
   "sarcini": "Intabulare, drept de IPOTECĂ LEGALĂ, Valoare:215000 lei, în favoarea STATUL ROMÂN PRIN MINISTERUL FINANŢELOR PUBLICE şi BRD - GROUPE SOCIETE GENERALE SA, în procent de 50% fiecare,conform Act Administrativ nr.P14_701102 din 29.03.2022 emis de FNGCIMM SA IFN, BRD GSG SA",
   "unitateFiscala": "Administraţia Judeţeană a Finanţelor Publice Brăila",
   "judetNume": "BRĂILA",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:13:48+0300"
+  "citit": "2026-11-01T09:23:08+0000"
  },
  "515315": {
   "adresa": "sat Fetesti, com. Câmpuri, Jud. Vrancea",
@@ -6626,7 +6626,7 @@
   "judetNume": "VRANCEA",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-31T21:01:38+0000"
+  "citit": "2026-11-01T09:23:51+0000"
  },
  "515600": {
   "adresa": "COMUNA CREVENICU,JUDETUL TELEORMAN",
@@ -6666,7 +6666,7 @@
   "judetNume": "BIHOR",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:14:05+0300"
+  "citit": "2026-11-01T09:23:44+0000"
  },
  "515616": {
   "adresa": "Comuna Glodeanu Silistea, Sat Satu Nou, str. Principala nr. 39,Jud. Buzau",
@@ -6686,7 +6686,7 @@
   "judetNume": "BUZĂU",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:14:10+0300"
+  "citit": "2026-11-01T09:23:36+0000"
  },
  "515670": {
   "adresa": "Localitatea Stoileşti, sat Obogeni, judeţul Vâlcea",
@@ -6726,7 +6726,7 @@
   "judetNume": "OLT",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:14:24+0300"
+  "citit": "2026-11-01T09:24:16+0000"
  },
  "515619": {
   "adresa": "UAT Balotesti, Jud. Ilfov",
@@ -6766,7 +6766,7 @@
   "judetNume": "GORJ",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:14:36+0300"
+  "citit": "2026-11-01T09:24:32+0000"
  },
  "515673": {
   "adresa": "LOCALITATEA STOILESTI, SAT OBOGENI, JUDEŢUL VÂLCEA",
@@ -6786,7 +6786,7 @@
   "judetNume": "VÂLCEA",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:14:41+0300"
+  "citit": "2026-11-01T09:23:21+0000"
  },
  "515209": {
   "adresa": "LOC. BAIA MARE  STR RAPSODIEI NR 1 AP 40 JUD. MARAMURES",
@@ -6806,7 +6806,7 @@
   "judetNume": "MARAMUREŞ",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:14:47+0300"
+  "citit": "2026-11-01T09:24:24+0000"
  },
  "515314": {
   "adresa": "LOC. CLUJ-NAPOCA, JUD. CLUJ",
@@ -6826,7 +6826,7 @@
   "judetNume": "CLUJ",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:14:52+0300"
+  "citit": "2026-11-01T09:22:55+0000"
  },
  "515521": {
   "adresa": "sat LEPSA, jud. VRANCEA",
@@ -6846,7 +6846,7 @@
   "judetNume": "VRANCEA",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-31T21:01:32+0000"
+  "citit": "2026-11-01T09:23:01+0000"
  },
  "515372": {
   "adresa": "Comuna Bengesti Ciocadia, sat Bengesti, judetul Gorj",
@@ -6866,7 +6866,7 @@
   "judetNume": "GORJ",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-31T21:01:44+0000"
+  "citit": "2026-11-01T09:24:02+0000"
  },
  "515646": {
   "adresa": "Jud. Cluj, UAT Baciu",
@@ -6886,7 +6886,7 @@
   "judetNume": "CLUJ",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:15:09+0300"
+  "citit": "2026-11-01T09:24:09+0000"
  },
  "515522": {
   "adresa": "Baia Mare str Victoriei nr 116A ap. 5 mansarda",
@@ -6906,7 +6906,7 @@
   "judetNume": "MARAMUREŞ",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:15:15+0300"
+  "citit": "2026-11-01T09:23:14+0000"
  },
  "515340": {
   "adresa": "Jud.Vaslui,Mun.Husi,str.1 Decembrie,nr.3",
@@ -6926,7 +6926,7 @@
   "judetNume": "VASLUI",
   "ofertaMinima": 46612.5,
   "v": 2,
-  "citit": "2026-10-23T18:15:22+0300"
+  "citit": "2026-11-01T09:23:56+0000"
  },
  "515663": {
   "adresa": "Localitate Sarata, str. Statiunii, nr. 167, judet Bacau",
@@ -6986,7 +6986,7 @@
   "judetNume": "MEHEDINŢI",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-23T18:15:37+0300"
+  "citit": "2026-11-01T09:23:29+0000"
  },
  "515911": {
   "adresa": "Bucuresti, pe str. Maior Ionescu Atanasie, nr. 40, sector 2, zona Vatra Luminoasa ?i Arena Na?ionala în zona centrala a capitalei",
@@ -7566,7 +7566,7 @@
   "judetNume": "BOTOŞANI",
   "ofertaMinima": 4975.5,
   "v": 2,
-  "citit": "2026-10-31T21:01:07+0000"
+  "citit": "2026-11-01T09:22:27+0000"
  },
  "516870": {
   "adresa": "Cluj-Napoca, Ale. Herculane, jud. Cluj",
@@ -7726,7 +7726,7 @@
   "judetNume": "MUNICIPIUL BUCUREŞTI",
   "ofertaMinima": 1375.0,
   "v": 2,
-  "citit": "2026-10-31T21:00:59+0000"
+  "citit": "2026-11-01T09:22:20+0000"
  },
  "516847": {
   "adresa": "loc. Cheud, com. Napradea, jud. Salaj",
@@ -8166,7 +8166,7 @@
   "judetNume": "CLUJ",
   "ofertaMinima": null,
   "v": 2,
-  "citit": "2026-10-31T21:01:19+0000"
+  "citit": "2026-11-01T09:22:47+0000"
  },
  "516471": {
   "adresa": "Sat.Galşa, Com.Şiria, Jud.Arad",
@@ -8226,7 +8226,7 @@
   "judetNume": "HUNEDOARA",
   "ofertaMinima": 8787.75,
   "v": 2,
-  "citit": "2026-10-31T21:01:14+0000"
+  "citit": "2026-11-01T09:22:34+0000"
  },
  "516464": {
   "adresa": "Loc. Iana, jud. Vaslui",
@@ -8286,7 +8286,7 @@
   "judetNume": "BACĂU",
   "ofertaMinima": 9241.0,
   "v": 2,
-  "citit": "2026-10-31T21:01:25+0000"
+  "citit": "2026-11-01T09:22:40+0000"
  },
  "516462": {
   "adresa": "BACOVA",
@@ -9867,5 +9867,305 @@
   "ofertaMinima": 13168.5,
   "v": 2,
   "citit": "2026-10-31T20:59:30+0000"
+ },
+ "518034": {
+  "adresa": "Ungra, jud. Brasov",
+  "telefon": "0268308438",
+  "adresaPredare": "Ungra, jud. Brasov",
+  "adresaIdentificare": "Ungra, jud. Brasov",
+  "pretEvaluare": 55167.0,
+  "garantie": 2758.35,
+  "pasMinim": 2758.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 4,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": null,
+  "unitateFiscala": "Direcţia Generală Regională a Finanţelor Publice BRAŞOV",
+  "judetNume": "BRAŞOV",
+  "ofertaMinima": 13791.75,
+  "v": 2,
+  "citit": "2026-11-01T09:20:42+0000"
+ },
+ "518264": {
+  "adresa": "loc.Dej,str.Bistritei,nr.63,jud.Cluj",
+  "telefon": "0264216230",
+  "adresaPredare": "loc.Dej,str.Bistritei,nr.63,jud.Cluj",
+  "adresaIdentificare": "lod.Dej,str.Bistritei,nr.63,jud.Cluj",
+  "pretEvaluare": 575708.32,
+  "garantie": 57570.831999999995,
+  "pasMinim": 28785.42,
+  "cotaTva": 21.0,
+  "nrLicitatie": 0,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu sunt",
+  "unitateFiscala": "Unitatea Fiscală Municipală Dej",
+  "judetNume": "CLUJ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:20:48+0000"
+ },
+ "518255": {
+  "adresa": "localitatea  Şandra, judeţ Timiş",
+  "telefon": "0256200035",
+  "adresaPredare": "localitatea  Şandra, judeţ Timiş",
+  "adresaIdentificare": null,
+  "pretEvaluare": 297535.68,
+  "garantie": 29753.568,
+  "pasMinim": 14876.78,
+  "cotaTva": 0.0,
+  "nrLicitatie": 0,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Administrația Județeană a Finanțelor Publice Timiș - ipotecă .",
+  "unitateFiscala": "Administraţia Judeţeană a Finanţelor Publice Timiş",
+  "judetNume": "TIMIŞ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:20:53+0000"
+ },
+ "518265": {
+  "adresa": "loc.Dej,str.Bistritei,nr.63,jud.Cluj",
+  "telefon": "0264216230",
+  "adresaPredare": "loc.Dej,str.Bistritei,nr.63,jud.Cluj",
+  "adresaIdentificare": "loc.Dej,str.Bistritei,nr.63,jud.Cluj",
+  "pretEvaluare": 539174.79,
+  "garantie": 53917.47900000001,
+  "pasMinim": 26958.74,
+  "cotaTva": 21.0,
+  "nrLicitatie": 0,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu sunt",
+  "unitateFiscala": "Unitatea Fiscală Municipală Dej",
+  "judetNume": "CLUJ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:21:00+0000"
+ },
+ "518041": {
+  "adresa": "Tăut ,com.Batăr",
+  "telefon": "0259372537",
+  "adresaPredare": "Salonta",
+  "adresaIdentificare": "Tăut ,com Batăr",
+  "pretEvaluare": 528000.0,
+  "garantie": 39600.0,
+  "pasMinim": 19800.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 1,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu se cunosc .",
+  "unitateFiscala": "Unitatea Fiscală Orăşenească  Salonta",
+  "judetNume": "BIHOR",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:21:05+0000"
+ },
+ "518274": {
+  "adresa": "Jud.Cluj, UAT Floresti",
+  "telefon": "0264705597",
+  "adresaPredare": "Jud.Cluj, UAT Floresti",
+  "adresaIdentificare": "Jud.Cluj, UAT Floresti",
+  "pretEvaluare": 4700.0,
+  "garantie": 470.0,
+  "pasMinim": 705.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 0,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu sunt",
+  "unitateFiscala": "Administraţia Judeţeană a Finanţelor Publice Cluj",
+  "judetNume": "CLUJ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:21:12+0000"
+ },
+ "518078": {
+  "adresa": "Sat Sihlea, com. Sihlea, jud. Vrancea",
+  "telefon": "023723600/197",
+  "adresaPredare": "Sat Sihlea, com. Sihlea, jud. Vrancea",
+  "adresaIdentificare": null,
+  "pretEvaluare": 21512.0,
+  "garantie": 1075.6,
+  "pasMinim": 1613.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 3,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu se cunosc .",
+  "unitateFiscala": "Administraţia Judeţeană a Finanţelor Publice Vrancea",
+  "judetNume": "VRANCEA",
+  "ofertaMinima": 5378.0,
+  "v": 2,
+  "citit": "2026-11-01T09:21:18+0000"
+ },
+ "518036": {
+  "adresa": "Ungra, jud. Brasov",
+  "telefon": "0268308438",
+  "adresaPredare": "Ungra, jud. Brasov",
+  "adresaIdentificare": "Ungra, jud. Brasov",
+  "pretEvaluare": 103248.0,
+  "garantie": 5162.4,
+  "pasMinim": 2581.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 4,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": null,
+  "unitateFiscala": "Direcţia Generală Regională a Finanţelor Publice BRAŞOV",
+  "judetNume": "BRAŞOV",
+  "ofertaMinima": 25812.0,
+  "v": 2,
+  "citit": "2026-11-01T09:21:25+0000"
+ },
+ "518279": {
+  "adresa": "sat Razbuneni, com Bobalna",
+  "telefon": "0264216230",
+  "adresaPredare": "sat Razbuneni, com Bobalna",
+  "adresaIdentificare": "com Bobilna",
+  "pretEvaluare": 168500.21,
+  "garantie": 16850.020999999997,
+  "pasMinim": 8425.01,
+  "cotaTva": 0.0,
+  "nrLicitatie": 0,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu sunt",
+  "unitateFiscala": "Unitatea Fiscală Municipală Dej",
+  "judetNume": "CLUJ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:21:31+0000"
+ },
+ "518231": {
+  "adresa": "LOC BAIA MARE STR FRUMUSAUA NR 13",
+  "telefon": "0262205150",
+  "adresaPredare": "LOC BAIA MARE STR FRUMUSAUA NR 13",
+  "adresaIdentificare": "LOC BAIA MARE  STR FRUMUSAUA NR 13 JUD MARAMURES",
+  "pretEvaluare": 17600.0,
+  "garantie": 1320.0,
+  "pasMinim": 1980.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 1,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu se cunosc .",
+  "unitateFiscala": "Administraţia Judeţeană a Finanţelor Publice Maramureş",
+  "judetNume": "MARAMUREŞ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:21:38+0000"
+ },
+ "518038": {
+  "adresa": "Comuna Maciuca, sat Botorani, judetul Valcea",
+  "telefon": "0350733132",
+  "adresaPredare": "Comuna Maciuca, sat Botorani, judetul Valcea",
+  "adresaIdentificare": "ComunaMaciuca, sat Botorani, judetul Valcea",
+  "pretEvaluare": 107500.0,
+  "garantie": 5375.0,
+  "pasMinim": 2687.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 4,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Nu se cunosc",
+  "unitateFiscala": "Unitatea Fiscală Orăşenească Bălceşti",
+  "judetNume": "VÂLCEA",
+  "ofertaMinima": 26875.0,
+  "v": 2,
+  "citit": "2026-11-01T09:21:46+0000"
+ },
+ "518035": {
+  "adresa": "Ungra, jud. Brasov",
+  "telefon": "0268308438",
+  "adresaPredare": "Ungra, jud. Brasov",
+  "adresaIdentificare": "Ungra, jud. Brasov",
+  "pretEvaluare": 192326.0,
+  "garantie": 9616.3,
+  "pasMinim": 4808.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 4,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": null,
+  "unitateFiscala": "Direcţia Generală Regională a Finanţelor Publice BRAŞOV",
+  "judetNume": "BRAŞOV",
+  "ofertaMinima": 48081.5,
+  "v": 2,
+  "citit": "2026-11-01T09:21:53+0000"
+ },
+ "518228": {
+  "adresa": "Ibăneşti",
+  "telefon": "0265512591",
+  "adresaPredare": "Reghin Mihai Viteazu nr.2 jud. Mures",
+  "adresaIdentificare": "IBANESTI",
+  "pretEvaluare": 5184.0,
+  "garantie": 388.8,
+  "pasMinim": 583.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 1,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "NU SUNT",
+  "unitateFiscala": "Unitatea Fiscală Municipală Reghin",
+  "judetNume": "MUREŞ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:21:59+0000"
+ },
+ "518037": {
+  "adresa": "Ungra, jud. Brasov",
+  "telefon": "0268308438",
+  "adresaPredare": "Ungra, jud. Brasov",
+  "adresaIdentificare": "Ungra, jud. Brasov",
+  "pretEvaluare": 103248.0,
+  "garantie": 5162.4,
+  "pasMinim": 2581.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 4,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": null,
+  "unitateFiscala": "Direcţia Generală Regională a Finanţelor Publice BRAŞOV",
+  "judetNume": "BRAŞOV",
+  "ofertaMinima": 25812.0,
+  "v": 2,
+  "citit": "2026-11-01T09:22:07+0000"
+ },
+ "518030": {
+  "adresa": "UAT Ghiroda, judeţ Timiş",
+  "telefon": "0256200035",
+  "adresaPredare": "UAT Ghiroda, judeţ Timiş",
+  "adresaIdentificare": null,
+  "pretEvaluare": 366000.0,
+  "garantie": 36600.0,
+  "pasMinim": 18300.0,
+  "cotaTva": 0.0,
+  "nrLicitatie": 0,
+  "sechestrat": true,
+  "permiteVizionare": false,
+  "nrOferte": 0,
+  "sarcini": "Administraţia Judeţeană a Finanţelor Publice Timiş-Ipotecă legală",
+  "unitateFiscala": "Administraţia Judeţeană a Finanţelor Publice Timiş",
+  "judetNume": "TIMIŞ",
+  "ofertaMinima": null,
+  "v": 2,
+  "citit": "2026-11-01T09:22:13+0000"
  }
 }
